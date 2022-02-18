@@ -1,3 +1,4 @@
+import { IBcryptHashProvider } from "@shared/container/providers/Bcrypt/models/IBcryptHashProvider";
 import AppError from "@shared/errors/AppError";
 import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
@@ -10,6 +11,8 @@ export default class CreateUserService {
     constructor(
         @inject('userRepository')
         private userRepository: IUserRepository,
+        @inject('hashProvider')
+        private hashProvider: IBcryptHashProvider,
     ) {}
 
     public async execute({ name, email, password }: ICreateUser): Promise<IUser> {
@@ -25,7 +28,7 @@ export default class CreateUserService {
             password,
         });
 
-        user.password = await hash(password, 8);
+        user.password = await this.hashProvider.generateHash(password);
 
         await this.userRepository.save(user);
 

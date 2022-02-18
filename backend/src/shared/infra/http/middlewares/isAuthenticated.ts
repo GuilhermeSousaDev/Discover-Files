@@ -6,6 +6,7 @@ import { verify } from "jsonwebtoken";
 interface IUserPayload {
     id: string;
     name: string;
+    avatar: string;
 }
 
 export default function isAuthenticated(
@@ -20,11 +21,12 @@ export default function isAuthenticated(
     }
 
     try {
-        const { id, name } = verify(token, auth.secret) as IUserPayload;
+        const { id, name, avatar } = verify(token, auth.secret) as IUserPayload;
 
         req.user = {
             id,
             name,
+            avatar,
         };
 
         next();
