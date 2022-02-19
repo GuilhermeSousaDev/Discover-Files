@@ -4,15 +4,19 @@ import { container } from "tsyringe";
 
 export default class SessionController {
     public async create(req: Request, res: Response): Promise<Response> {
-        const { email, password } = req.body;
+        try {
+            const { email, password } = req.body;
 
-        const createSession = container.resolve(CreateSessionService);
+            const createSession = container.resolve(CreateSessionService);
 
-        const session = await createSession.execute({ 
-            email, 
-            password,
-        });
+            const session = await createSession.execute({ 
+                email, 
+                password,
+            });
 
-        return res.json(session);
+            return res.json(session);
+        } catch (error) {
+            return res.json(error.message);
+        }
     }
 }
