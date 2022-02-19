@@ -145,3 +145,10 @@ export const Button = styled.button`
     border-radius: 2rem;
     cursor: pointer;
   `;
+
+export const Response = styled.span`
+  background: #ff4343;
+  color: #000;
+  border-radius: 10px;
+  padding: 10px;
+`;

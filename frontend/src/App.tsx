@@ -10,7 +10,7 @@ function App() {
       <Router />
       <GlobalStyle />
     </AuthProvider>
-  );
+  )
 }
 
 export default App;
