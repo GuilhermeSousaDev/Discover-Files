@@ -11,8 +11,13 @@ export class FilesRepository implements IFilesRepository {
         this.ormRepository = getRepository(Files);
     }
 
-    public async create({ name, file }: ICreateFile): Promise<IFiles> {
-        const newFile = this.ormRepository.create({ name, file });
+    public async create({ name, file, size, type }: ICreateFile): Promise<IFiles> {
+        const newFile = this.ormRepository.create({ 
+            name, 
+            file,
+            size,
+            type,
+        });
 
         return newFile;
     }

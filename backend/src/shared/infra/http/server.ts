@@ -21,7 +21,12 @@ class App {
         this.routes();
         this.listen();
     }
-
+    
+    private middlewares() {
+        this.app.use(cors());
+        this.app.use(limiter);
+    }
+    
     private routes() {
         this.app.use(express.json());
         this.app.use(express.urlencoded());
@@ -41,11 +46,6 @@ class App {
                 message: error.message,
             });
         })
-    }
-
-    private middlewares() {
-        this.app.use(cors());
-        this.app.use(limiter);
     }
 
     private listen() {

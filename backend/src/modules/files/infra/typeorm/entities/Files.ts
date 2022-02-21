@@ -1,4 +1,10 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { 
+    Column, 
+    CreateDateColumn, 
+    Entity, 
+    PrimaryGeneratedColumn, 
+    UpdateDateColumn,
+} from "typeorm";
 
 @Entity('uploaded_files')
 export class Files {
@@ -13,6 +19,9 @@ export class Files {
 
     @Column()
     type: string;
+
+    @Column()
+    size: number;
 
     @CreateDateColumn({ default: () => "NOW()" })
     createdAt: Date;
