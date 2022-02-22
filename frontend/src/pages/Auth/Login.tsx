@@ -1,6 +1,13 @@
-import React, { ChangeEvent, FC, useCallback, useState } from 'react';
+import React, { 
+    ChangeEvent, 
+    FC, 
+    useCallback, 
+    useState, 
+    useEffect, 
+    useContext 
+} from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../services/Axios';
+import { AuthContext } from '../../services/Context';
 import { 
     Container,
     Button, 
@@ -11,6 +18,7 @@ import {
     Logo,
     Input,
 } from './style';
+import api from '../../services/Axios';
 
 interface IForm {
     [key: string]: string;
@@ -32,7 +40,15 @@ interface IResponse {
 }
 
 export const Login: FC = () => {
+    const { isAuth } = useContext(AuthContext);
     const navigate = useNavigate();
+    
+    useEffect(() => {
+        if(isAuth) {
+            navigate('/');
+        }
+    }, [isAuth, navigate]);
+
     const [form, setForm] = useState<IForm>();
 
     const changeData = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +75,7 @@ export const Login: FC = () => {
     return (
         <Container>
             <MainContainer>
-                <Logo>Discover - Login</Logo>
+                <Logo>DropFile - Login</Logo>
                 <br />
                 <InputContainer>
                     <Input 
@@ -76,7 +92,12 @@ export const Login: FC = () => {
                     />
                 </InputContainer>
                 <ButtonContainer>
-                    <Button onClick={handleSubmit}>Sign Up</Button>
+                    <Button onClick={handleSubmit}>Sign In</Button>
+                </ButtonContainer>
+                <ButtonContainer>
+                    <Button onClick={() => navigate('/register')}>
+                        Register
+                    </Button>
                 </ButtonContainer>
                 <ForgotPassword>Forgot Password ?</ForgotPassword>
             </MainContainer>

@@ -2,9 +2,13 @@ import React, {
     ChangeEvent, 
     FC, 
     useCallback, 
+    useContext, 
+    useEffect, 
     useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../services/Axios';
+import { AuthContext } from '../../services/Context';
 import { 
     Button, 
     ButtonContainer, 
@@ -21,6 +25,15 @@ interface IForm {
 }
 
 export const Register: FC = () => {
+    const navigate = useNavigate();
+    const { isAuth } = useContext(AuthContext);
+
+    useEffect(() => {
+        if(isAuth) {
+            navigate('/');
+        }
+    }, [isAuth, navigate]);
+
     const [form, setForm] = useState<IForm>();
     const [msg, setMsg] = useState<string>('');
 
@@ -47,7 +60,7 @@ export const Register: FC = () => {
     return (
         <Container>
             <MainContainer>
-                <Logo>Discover - Create Account</Logo>
+                <Logo>DropFile - Register</Logo>
                 <br />
                 <InputContainer>
                     <Input 
@@ -69,6 +82,7 @@ export const Register: FC = () => {
                         onChange={changeData}
                     />
                 </InputContainer>
+                <br />
                 <br />
                 <ButtonContainer>
                     <Button onClick={handleSubmit}>Create Account</Button>

@@ -60,8 +60,8 @@ export const MainContainer = styled.div`
 
 export const Logo = styled.h2`
   margin: 3rem 0 2rem 0;
+  color: #212529;
   font-family: 'IBM Plex Sans', sans-serif;
-  //font-family: 'Shizuru', cursive;
 `;
 
 export const InputContainer = styled.div`
@@ -144,7 +144,7 @@ export const Button = styled.button`
     color: white;
     border-radius: 2rem;
     cursor: pointer;
-  `;
+`;
 
 export const Response = styled.span`
   background: #ff4343;

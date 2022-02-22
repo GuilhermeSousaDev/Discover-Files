@@ -36,6 +36,9 @@ const AuthProvider: FC = ({ children }) => {
         if(localStorage.getItem('token')) {
             setToken(localStorage.getItem('token'));
             setIsAuth(true);
+        } else {
+            setIsAuth(false);
+            setToken(null);
         }
     }, []);
 

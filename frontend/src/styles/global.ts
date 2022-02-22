@@ -7,12 +7,8 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
-    body {
-        background: linear-gradient(to right, #1a3365 0%, #ff4343 79%);
-    }
-
     #root {
-        max-width: 1120px;
+        max-width: 1220px;
         margin: 0 auto;
     }
 `;
