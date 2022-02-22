@@ -1,7 +1,9 @@
+import { User } from "@modules/user/infra/typeorm/entities/User";
 import { 
     Column, 
     CreateDateColumn, 
     Entity, 
+    ManyToOne, 
     PrimaryGeneratedColumn, 
     UpdateDateColumn,
 } from "typeorm";
@@ -15,6 +17,9 @@ export class Files {
     name: string;
 
     @Column()
+    description: string;
+
+    @Column()
     file: string;
 
     @Column()
@@ -22,6 +27,9 @@ export class Files {
 
     @Column()
     size: number;
+
+    @ManyToOne(_ => User, user => user.posted_files)
+    user: User;
 
     @CreateDateColumn({ default: () => "NOW()" })
     createdAt: Date;

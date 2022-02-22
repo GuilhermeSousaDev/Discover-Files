@@ -1,6 +1,5 @@
-import { IBcryptHashProvider } from "@shared/container/providers/Bcrypt/models/IBcryptHashProvider";
 import AppError from "@shared/errors/AppError";
-import { hash } from "bcryptjs";
+import { IBcryptHashProvider } from "@shared/container/providers/Bcrypt/models/IBcryptHashProvider";
 import { inject, injectable } from "tsyringe";
 import { ICreateUser } from "../domain/models/ICreateUser";
 import { IUser } from "../domain/models/IUser";

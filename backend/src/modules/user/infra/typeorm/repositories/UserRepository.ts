@@ -15,7 +15,7 @@ export class UserRepository implements IUserRepository {
     }
 
     public async remove(user: IUser): Promise<void> {
-        this.ormRepository.remove(user);
+        this.ormRepository.delete(user);
     }
 
     public async create({ name, email, password }: ICreateUser): Promise<IUser> {

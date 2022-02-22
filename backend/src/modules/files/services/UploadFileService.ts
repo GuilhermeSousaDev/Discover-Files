@@ -13,26 +13,33 @@ export default class UploadFileService {
         private filesRepository: IFilesRepository,
     ) {}
 
-    public async execute({ name, file, buffer }: ICreateFile): Promise<IFiles> {
+    public async execute({ 
+        name, 
+        file, 
+        buffer, 
+        description, 
+        user,
+    }: ICreateFile): Promise<IFiles> {
         if(!file.includes('.')) {
             throw new AppError('The file not have a explicity type: ex: png, pdf, csv');
         } 
 
-        const [, typeFile] = file.split('.');
-
         const size = fs.statSync(buffer).size;
-
+        const [, typeFile] = file.split('.');
+        
         const randomBytes = crypto.randomBytes(10);
         const path = `${randomBytes}-${file}`;
-
+        
         fs.createReadStream(buffer)
-            .pipe(fs.createWriteStream(`uploads/${path}`));
-
+        .pipe(fs.createWriteStream(`uploads/${path}`));
+        
         const newFile = await this.filesRepository.create({
             name,
+            description,
             file,
             type: typeFile,
             size,
+            user,
         });
 
         return newFile;
