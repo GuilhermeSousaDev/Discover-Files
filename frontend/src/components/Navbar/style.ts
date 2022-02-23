@@ -10,6 +10,10 @@ export const Nav = styled.nav`
         text-decoration: none;
         color: #212529;
     }
+    button:hover {
+        background: #1a3365;
+        color: #fff;
+    }
 `;
 
 export const Button = styled.button`
