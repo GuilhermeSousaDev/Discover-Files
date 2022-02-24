@@ -1,6 +1,15 @@
 import React, { FC, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../services/Context';
+import { 
+    Button, 
+    Container,
+    Text, 
+    Left, 
+    ButtonContainer,
+    Right,
+} from './style';
+import { FcUpload } from 'react-icons/fc';
 import Navbar from '../../components/Navbar';
 
 const Home: FC = () => {
@@ -14,7 +23,34 @@ const Home: FC = () => {
     return (
         <>
             <Navbar />
-            <h1>Home</h1>
+            <Container>
+                <Left>
+                    <Text>
+                        Find or Post any type of file
+                    </Text>
+                    <ButtonContainer>
+                        <Link to={'/files'}>
+                            <Button 
+                                theme={'#1a3365'}
+                                color={'#f8f9fa'}
+                            >
+                                Find Files
+                            </Button>
+                        </Link>
+                        <Link to={'/upload'}>
+                            <Button 
+                                theme={'#f8f9fa'}
+                                color={'#212529'}
+                            >
+                                Upload Files
+                            </Button>
+                        </Link>
+                    </ButtonContainer>
+                </Left>
+                <Right>
+                    <FcUpload />
+                </Right>
+            </Container>
         </>
     );
 };

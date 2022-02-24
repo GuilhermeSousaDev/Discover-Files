@@ -5,7 +5,8 @@ export const Nav = styled.nav`
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #212529;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     a {
         text-decoration: none;
         color: #212529;

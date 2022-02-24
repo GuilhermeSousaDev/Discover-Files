@@ -7,7 +7,7 @@ const Navbar: FC = () => {
     return (
         <Nav>
             <Link to={'/files'}>
-                <Button>Procurar Arquivos</Button>
+                <Button>Upload Files</Button>
             </Link>
             <Link to={'/'}>
                 <Title><FiUpload />DropFile</Title>
