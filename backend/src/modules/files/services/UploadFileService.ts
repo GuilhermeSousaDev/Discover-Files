@@ -36,7 +36,7 @@ export default class UploadFileService {
         const newFile = await this.filesRepository.create({
             name,
             description,
-            file,
+            file: path,
             type: typeFile,
             size,
             user,

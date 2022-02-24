@@ -19,7 +19,7 @@ export class Files {
     @Column()
     description: string;
 
-    @Column()
+    @Column({ unique: true })
     file: string;
 
     @Column()

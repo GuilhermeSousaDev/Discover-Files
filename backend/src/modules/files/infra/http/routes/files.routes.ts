@@ -15,6 +15,7 @@ filesRouter.get(
     celebrate({
         [Segments.PARAMS]: {
             filename: Joi.string().required(),
+            name: Joi.string().required(),
         }
     }),
     filesController.index,

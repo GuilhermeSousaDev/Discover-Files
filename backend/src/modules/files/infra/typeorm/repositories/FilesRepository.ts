@@ -43,4 +43,12 @@ export class FilesRepository implements IFilesRepository {
             },
         });
     }
+
+    public async findFileByPath(path: string): Promise<IFiles[]> {
+        return this.ormRepository.find({
+            where: {
+                file: path,
+            },
+        });
+    }
 }

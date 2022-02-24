@@ -9,7 +9,7 @@ export default class FilesController {
 
         const readFile = container.resolve(ReadFileService);
 
-        const file = readFile.execute(filename);
+        const file = readFile.execute({ filename });
 
         return res.json(file);
     }

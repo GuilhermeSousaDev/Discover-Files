@@ -1,18 +1,38 @@
 import fs from 'fs'; 
 import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
+import { IFilesRepository } from '../domain/repositories/IFilesRepository';
+import { IFiles } from '../domain/models/IFiles';
 
 interface IResponse {
+    file: IFiles[];
     data?: string;
     image?: string;
 }
 
+interface IRequest {
+    filename: string;
+}
+
+@injectable()
 export default class ReadFileService {
-    public execute(filename: string): IResponse {
+    constructor(
+        @inject('fileRepository')
+        private fileRepository: IFilesRepository,
+    ) {}
+    
+    public async execute({ filename }: IRequest): Promise<IResponse> {
         const path = `uploads/${filename}`;
 
-        const fileExists = fs.statSync(path);
+        const file = await this.fileRepository.findFileByPath(filename);
 
-        if(!fileExists) {
+        if(!file) {
+            throw new AppError('File not found');
+        }
+
+        const filePathExists = fs.statSync(path);
+
+        if(!filePathExists) {
             throw new AppError('File not found');
         }
 
@@ -23,6 +43,7 @@ export default class ReadFileService {
         imgTypes.map(types => {
             if(typeFile === types) {
                 return {
+                    file,
                     image: `http://localhost:8081/files/${filename}`,
                 };
             }
@@ -34,6 +55,7 @@ export default class ReadFileService {
         );
 
         return {
+            file,
             data: contentFile,
         };
     }
