@@ -2,10 +2,10 @@ import { ICreateFile } from "../models/ICreateFile";
 import { IFiles } from "../models/IFiles";
 
 export interface IFilesRepository {
-    find(): Promise<IFiles[]>;  
-    findFile(name: string): Promise<IFiles[]>;
-    findFileByPath(path: string): Promise<IFiles[]>;
-    create({ name, file, type, description }: ICreateFile): Promise<IFiles>;
     save(file: IFiles): Promise<void>;
     remove(file: IFiles): Promise<void>
+    create({ name, file, type, description }: ICreateFile): Promise<IFiles>;
+    find(): Promise<IFiles[]>;  
+    findById(id: string): Promise<IFiles>;
+    findFiles(name: string): Promise<IFiles[]>;
 }

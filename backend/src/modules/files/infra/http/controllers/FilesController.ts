@@ -5,11 +5,11 @@ import { container } from "tsyringe";
 
 export default class FilesController {
     public async index(req: Request, res: Response): Promise<Response> {
-        const { filename } = req.params;
+        const { id } = req.params;
 
         const readFile = container.resolve(ReadFileService);
 
-        const file = readFile.execute({ filename });
+        const file = readFile.execute({ id });
 
         return res.json(file);
     }

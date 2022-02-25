@@ -11,11 +11,10 @@ const filesController = new FilesController();
 const multerConfig = multer();
 
 filesRouter.get(
-    '/:filename', 
+    '/:id', 
     celebrate({
         [Segments.PARAMS]: {
-            filename: Joi.string().required(),
-            name: Joi.string().required(),
+            id: Joi.string().required(),
         }
     }),
     filesController.index,

@@ -36,18 +36,14 @@ export class FilesRepository implements IFilesRepository {
         return this.ormRepository.find();
     }
 
-    public async findFile(name: string): Promise<IFiles[] | undefined> {
+    public async findById(id: string): Promise<IFiles> {
+        return this.ormRepository.findOne(id);
+    }
+
+    public async findFiles(name: string): Promise<IFiles[] | undefined> {
         return this.ormRepository.find({
             where: {
                 name: Like(name),
-            },
-        });
-    }
-
-    public async findFileByPath(path: string): Promise<IFiles[]> {
-        return this.ormRepository.find({
-            where: {
-                file: path,
             },
         });
     }

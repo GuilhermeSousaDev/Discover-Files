@@ -10,7 +10,7 @@ export default class ListFileByNameService {
     ) {}
 
     public async execute(name: string): Promise<IFiles[] | undefined> {
-        const files = await this.fileRepository.findFile(name);
+        const files = await this.fileRepository.findFiles(name);
 
         return files;
     }

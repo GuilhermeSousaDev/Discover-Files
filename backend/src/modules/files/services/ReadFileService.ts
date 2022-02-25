@@ -5,13 +5,13 @@ import { IFilesRepository } from '../domain/repositories/IFilesRepository';
 import { IFiles } from '../domain/models/IFiles';
 
 interface IResponse {
-    file: IFiles[];
-    data?: string;
+    file: IFiles;
+    contentFile?: string;
     image?: string;
 }
 
 interface IRequest {
-    filename: string;
+    id: string;
 }
 
 @injectable()
@@ -21,10 +21,10 @@ export default class ReadFileService {
         private fileRepository: IFilesRepository,
     ) {}
     
-    public async execute({ filename }: IRequest): Promise<IResponse> {
-        const path = `uploads/${filename}`;
-
-        const file = await this.fileRepository.findFileByPath(filename);
+    public async execute({ id }: IRequest): Promise<IResponse> {
+        const file = await this.fileRepository.findById(id);
+        
+        const path = `uploads/${file.file}`;
 
         if(!file) {
             throw new AppError('File not found');
@@ -33,10 +33,10 @@ export default class ReadFileService {
         const filePathExists = fs.statSync(path);
 
         if(!filePathExists) {
-            throw new AppError('File not found');
+            throw new AppError('File not found on directory');
         }
 
-        const [, typeFile] = filename.split('.');
+        const [, typeFile] = file.file.split('.');
 
         const imgTypes = ['png', 'jpg', 'jpeg'];
 
@@ -44,19 +44,19 @@ export default class ReadFileService {
             if(typeFile === types) {
                 return {
                     file,
-                    image: `http://localhost:8081/files/${filename}`,
+                    image: `http://localhost:8081/files/${file.file}`,
                 };
             }
         });
 
         const contentFile = fs.readFileSync(
-            `uploads/${filename}`, 
+            `uploads/${file.file}`, 
             { encoding: 'utf-8' },
         );
 
         return {
             file,
-            data: contentFile,
+            contentFile,
         };
     }
 }
