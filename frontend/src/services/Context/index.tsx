@@ -4,6 +4,7 @@ import React, {
     useEffect, 
     useState,
 } from 'react';
+import api from '../Axios';
 
 interface IUser {
     id: string;
@@ -34,8 +35,23 @@ const AuthProvider: FC = ({ children }) => {
 
     useEffect(() => {
         if(localStorage.getItem('token')) {
-            setToken(localStorage.getItem('token'));
-            setIsAuth(true);
+            (async () => {
+                const { data, status } = await api.post('/token', '', {
+                    headers: {
+                        Authorization: localStorage.getItem('token') as string,
+                    }
+                });
+
+                if(status !== 200) {
+                    setIsAuth(false);
+                    setToken(null);
+                    setUser(undefined);
+                } else {
+                    setUser(data);
+                    setIsAuth(true);
+                    setToken(data.token);
+                }
+            })();
         } else {
             setIsAuth(false);
             setToken(null);

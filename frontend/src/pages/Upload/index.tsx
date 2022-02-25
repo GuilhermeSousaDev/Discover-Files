@@ -1,18 +1,17 @@
 import React, { 
-    FC, 
-    useState, 
-    useRef, 
-    MutableRefObject 
+    FC,
+    useState,
 } from 'react';
 import { FiUpload } from 'react-icons/fi';
 import { Container, Text, UploadContainer } from './style';
 import { useDropzone } from 'react-dropzone';
 import Navbar from '../../components/Navbar';
+import ModalSendData from '../../components/Modal/ModalSendData';
 
 const Upload: FC = () => {
-    const [file, setFile] = useState<File>();
+    const [file, setFile] = useState<File & {preview: string}>();
     const [color, setColor] = useState<string>('#fff');
-    const [msg, setMsg] = useState<string>('Arraste um Arquivo');
+    const [msg, setMsg] = useState<string>('Clique ou Arraste o Arquivo');
     
     const { getRootProps }  = useDropzone({
         onDrop: acceptedFiles => {
@@ -28,6 +27,7 @@ const Upload: FC = () => {
             setColor('#28a745');
         },
     });
+
     return (
         <>
             <Navbar />
@@ -39,6 +39,14 @@ const Upload: FC = () => {
                     <FiUpload />
                     <Text>{msg}</Text>
                 </UploadContainer>
+                {
+                        file?
+                            <>
+                                <img src={file.preview} alt="" /> 
+                                <ModalSendData file={file} />
+                            </> : ''
+                }
+                
             </Container>
         </>
     )

@@ -1,18 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Nav, Title, Sign } from './style';
+import { Button, Nav, Title, SignOrProfile } from './style';
 import { FiUpload } from 'react-icons/fi';
+import { AuthContext } from '../../services/Context/'
 
 const Navbar: FC = () => {
+    const { isAuth } = useContext(AuthContext);
+
     return (
         <Nav>
-            <Link to={'/files'}>
+            <Link to={'/upload'}>
                 <Button>Upload Files</Button>
             </Link>
             <Link to={'/'}>
                 <Title><FiUpload />DropFile</Title>
             </Link>
-            <Link to={'/login'}><Sign>Sign in</Sign></Link>
+            {
+                isAuth?
+                <Link to={'/perfil'}><SignOrProfile>Perfil</SignOrProfile></Link> :
+                <Link to={'/login'}><SignOrProfile>Sign in</SignOrProfile></Link>
+            }
         </Nav>
     )
 };

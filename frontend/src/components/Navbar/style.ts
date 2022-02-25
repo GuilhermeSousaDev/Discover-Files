@@ -5,8 +5,7 @@ export const Nav = styled.nav`
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #212529;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
     a {
         text-decoration: none;
         color: #212529;
@@ -40,7 +39,7 @@ export const Title = styled.p`
     font-family: 'IBM Plex Sans', sans-serif;
 `;
 
-export const Sign = styled.p`
+export const SignOrProfile = styled.p`
     font-family: 'Roboto Condensed', sans-serif;    
     font-size: 15px;
     color: #007bff;
