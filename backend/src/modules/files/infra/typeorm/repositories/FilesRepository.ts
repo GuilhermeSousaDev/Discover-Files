@@ -12,7 +12,7 @@ export class FilesRepository implements IFilesRepository {
     }
 
     public async create({ name, file, size, type, description, user }: ICreateFile): Promise<IFiles> {
-        const newFile = this.ormRepository.create({ 
+        return this.ormRepository.create({ 
             name, 
             description,
             file,
@@ -20,12 +20,10 @@ export class FilesRepository implements IFilesRepository {
             type,
             user,
         });
-
-        return newFile;
     }
 
-    public async save(file: IFiles): Promise<void> {
-        this.ormRepository.save(file);
+    public async save(file: IFiles): Promise<IFiles> {
+        return this.ormRepository.save(file);
     }
 
     public async remove(file: IFiles): Promise<void> {
@@ -45,6 +43,14 @@ export class FilesRepository implements IFilesRepository {
             where: {
                 name: Like(name),
             },
+            relations: ['user'],
+        });
+    }
+
+    public async findPaginate(): Promise<IFiles[]> {
+        return this.ormRepository.find({
+            take: 100,
+            relations: ['user'],
         });
     }
 }

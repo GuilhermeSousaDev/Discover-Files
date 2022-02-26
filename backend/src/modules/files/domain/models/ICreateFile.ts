@@ -7,5 +7,4 @@ export interface ICreateFile {
     user: User;
     buffer?: Buffer;
     type?: string;
-    size?: number;
 }

@@ -9,7 +9,7 @@ import { IFiles } from '../domain/models/IFiles';
 @injectable()
 export default class UploadFileService {
     constructor(
-        @inject('filesRepository')
+        @inject('fileRepository')
         private filesRepository: IFilesRepository,
     ) {}
 
@@ -24,23 +24,23 @@ export default class UploadFileService {
             throw new AppError('The file not have a explicity type: ex: png, pdf, csv');
         } 
 
-        const size = fs.statSync(buffer).size;
         const [, typeFile] = file.split('.');
         
-        const randomBytes = crypto.randomBytes(10);
-        const path = `${randomBytes}-${file}`;
+        const hash = crypto.randomBytes(10).toString('hex');
+
+        const filenameHash = `${hash}-${file}`;
         
-        fs.createReadStream(buffer)
-        .pipe(fs.createWriteStream(`uploads/${path}`));
+        fs.writeFileSync(`uploads/${file}`, buffer);
         
         const newFile = await this.filesRepository.create({
             name,
             description,
-            file: path,
+            file: filenameHash,
             type: typeFile,
-            size,
             user,
         });
+
+        await this.filesRepository.save(newFile);
 
         return newFile;
     }

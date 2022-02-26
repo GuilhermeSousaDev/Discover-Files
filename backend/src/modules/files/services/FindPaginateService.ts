@@ -3,14 +3,14 @@ import { IFiles } from "../domain/models/IFiles";
 import { IFilesRepository } from "../domain/repositories/IFilesRepository";
 
 @injectable()
-export default class ListFileByNameService {
+export default class FindPaginateService {
     constructor(
         @inject('fileRepository')
         private fileRepository: IFilesRepository,
     ) {}
 
-    public async execute(name: string): Promise<IFiles[] | undefined> {
-        const files = await this.fileRepository.findFiles(name);
+    public async execute(): Promise<IFiles[]> {
+        const files = await this.fileRepository.findPaginate();
 
         return files;
     }

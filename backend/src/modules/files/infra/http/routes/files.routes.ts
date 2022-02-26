@@ -5,10 +5,11 @@ import isAuthenticated from '@shared/infra/http/middlewares/isAuthenticated';
 import FilesController from '../controllers/FilesController';
 
 const filesRouter = Router();
-filesRouter.use(isAuthenticated);
 
 const filesController = new FilesController();
 const multerConfig = multer();
+
+filesRouter.get('/', filesController.index);
 
 filesRouter.get(
     '/:id', 
@@ -17,18 +18,20 @@ filesRouter.get(
             id: Joi.string().required(),
         }
     }),
-    filesController.index,
+    filesController.show,
 );
 
 filesRouter.post(
     '/', 
+    isAuthenticated,
+    multerConfig.single('file'),
     celebrate({
         [Segments.BODY]: {
             name: Joi.string().required(),
             description: Joi.string().required(),
+            user: Joi.string().required(),
         }
     }),
-    multerConfig.single('file'),
     filesController.create,
 );
 
