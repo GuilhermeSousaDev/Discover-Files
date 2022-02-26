@@ -47,7 +47,7 @@ const AuthProvider: FC = ({ children }) => {
                     setToken(null);
                     setUser(undefined);
                 } else {
-                    setUser(data);
+                    setUser(data.verifiedToken);
                     setIsAuth(true);
                     setToken(data.token);
                 }

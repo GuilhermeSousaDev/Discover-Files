@@ -12,7 +12,7 @@ interface IProp {
 }
 
 const ModalSendData: FC<IProp> = ({ file }) => {
-    const { token } = useContext(AuthContext);
+    const { token, user } = useContext(AuthContext);
     const [data, setData] = useState<IData>();
 
     const handleData = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -23,22 +23,23 @@ const ModalSendData: FC<IProp> = ({ file }) => {
     }, [data]);
 
     const sendFile = useCallback(async () => {
-        if(file && data) {
+        if(file && data && user) {
             const form = new FormData();
 
-            form.append('file', file);
+            form.append('file', file);  
             form.append('name', data.name);
             form.append('description', data.description);
+            form.append('user', user.id);
 
-            const request = await api.post('/files', form, {
+            const request = await api.post('/files', form, { 
                 headers: {
                     Authorization: token as string,
-                }
+                },
             });
 
             console.log(request);
         }
-    }, [file, data, token]);
+    }, [file, data, token, user]);
 
     return (
         <>

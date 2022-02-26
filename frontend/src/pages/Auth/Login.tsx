@@ -62,8 +62,6 @@ export const Login: FC = () => {
         if(form) {
             const { data } = await api.post<IResponse>('/login', form);
 
-            console.log(data);
-
             if(data.token) {
                 localStorage.setItem('token', data.token);
                 navigate('/');
