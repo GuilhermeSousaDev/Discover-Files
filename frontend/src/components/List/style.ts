@@ -27,3 +27,9 @@ export const Button = styled.button`
     font-family: 'Montserrat', sans-serif;
     cursor: pointer;
 `;
+
+export const Title = styled.h2`
+    text-align: center;
+    margin-bottom: 1rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+`;

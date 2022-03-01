@@ -58,13 +58,15 @@ export const Login: FC = () => {
         });
     }, [form]);
 
-    const handleSubmit = useCallback(async () => {
+    const handleSign = useCallback(async () => {
         if(form) {
             const { data } = await api.post<IResponse>('/login', form);
 
             if(data.token) {
                 localStorage.setItem('token', data.token);
                 navigate('/');
+                // eslint-disable-next-line no-restricted-globals
+                location.reload();
             }
         }
         
@@ -90,7 +92,7 @@ export const Login: FC = () => {
                     />
                 </InputContainer>
                 <ButtonContainer>
-                    <Button onClick={handleSubmit}>Sign In</Button>
+                    <Button onClick={handleSign}>Sign In</Button>
                 </ButtonContainer>
                 <ButtonContainer>
                     <Button onClick={() => navigate('/register')}>
