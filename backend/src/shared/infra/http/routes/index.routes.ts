@@ -1,5 +1,5 @@
 import filesRouter from '@modules/files/infra/http/routes/files.routes';
-import listFilesRouter from '@modules/files/infra/http/routes/files_by_name.routes';
+import searchFilesRouter from '@modules/files/infra/http/routes/search_files.routes';
 import avatarRouter from '@modules/user/infra/http/routes/avatar.routes';
 import sessionRouter from '@modules/user/infra/http/routes/session.routes';
 import tokenRouter from '@modules/user/infra/http/routes/token.routes';
@@ -14,6 +14,6 @@ router.use('/token', tokenRouter);
 router.use('/login', sessionRouter);
 
 router.use('/files', filesRouter);
-router.use('/files/list', listFilesRouter);
+router.use('/files/list', searchFilesRouter);
 
 export default router;

@@ -14,13 +14,17 @@ export default class FilesController {
     }
 
     public async show(req: Request, res: Response): Promise<Response> {
-        const { id } = req.params;
+        try {
+            const { id } = req.params;
 
-        const readFile = container.resolve(ReadFileService);
+            const readFile = container.resolve(ReadFileService);
 
-        const file = await readFile.execute({ id });
+            const file = await readFile.execute({ id });
 
-        return res.json(file);
+            return res.json(file);
+        } catch (e) {
+            return res.json(e);
+        }
     }
 
     public async create(req: Request, res: Response): Promise<Response> {
