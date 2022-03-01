@@ -30,7 +30,7 @@ export default class UploadFileService {
 
         const filenameHash = `${hash}-${file}`;
         
-        fs.writeFileSync(`uploads/${file}`, buffer);
+        fs.writeFileSync(`uploads/${filenameHash}`, buffer);
         
         const newFile = await this.filesRepository.create({
             name,

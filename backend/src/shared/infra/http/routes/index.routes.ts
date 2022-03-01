@@ -14,6 +14,6 @@ router.use('/token', tokenRouter);
 router.use('/login', sessionRouter);
 
 router.use('/files', filesRouter);
-router.use('/files/list', searchFilesRouter);
+router.use('/files/search', searchFilesRouter);
 
 export default router;

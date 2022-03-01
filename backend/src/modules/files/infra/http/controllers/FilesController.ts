@@ -1,6 +1,7 @@
 import FindPaginateService from "@modules/files/services/FindPaginateService";
 import ReadFileService from "@modules/files/services/ReadFileService";
 import UploadFileService from "@modules/files/services/UploadFileService";
+import DeleteFileService from "@modules/files/services/DeleteFileService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
@@ -46,5 +47,15 @@ export default class FilesController {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    public async delete(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params;
+
+        const deleteFile = container.resolve(DeleteFileService);
+
+        const file = await deleteFile.execute(Number(id));
+
+        return res.json('Deletado com Sucesso!');
     }
 }

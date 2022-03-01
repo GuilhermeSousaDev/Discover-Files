@@ -6,8 +6,7 @@ import { IFiles } from '../domain/models/IFiles';
 
 interface IResponse {
     file: IFiles;
-    contentFile?: string;
-    image?: string;
+    contentFile: string;
 }
 
 interface IRequest {
@@ -22,7 +21,7 @@ export default class ReadFileService {
     ) {}
     
     public async execute({ id }: IRequest): Promise<IResponse> {
-        const file = await this.fileRepository.findById(id);
+        const file = await this.fileRepository.findById(Number(id));
         
         const path = `uploads/${file.file}`;
 
@@ -36,16 +35,13 @@ export default class ReadFileService {
             throw new AppError('File not found on directory');
         }
 
-        const [, typeFile] = file.file.split('.');
-
         const imgTypes = ['png', 'jpg', 'jpeg'];
 
-        imgTypes.map(types => {
-            if(typeFile === types) {
-                return {
-                    file,
-                    image: `http://localhost:8081/files/${file.file}`,
-                };
+        const isImage = imgTypes.map(type => {
+            if(file.type === type) {
+                return true;
+            } else {
+                return false;
             }
         });
 

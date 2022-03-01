@@ -35,4 +35,14 @@ filesRouter.post(
     filesController.create,
 );
 
+filesRouter.delete(
+    '/:id',
+    celebrate({
+        [Segments.PARAMS]: {
+            id: Joi.number().required(),
+        },
+    }),
+    filesController.delete,
+);
+
 export default filesRouter;
