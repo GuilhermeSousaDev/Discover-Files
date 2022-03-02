@@ -29,14 +29,21 @@ export default class UploadFileService {
         const hash = crypto.randomBytes(10).toString('hex');
 
         const filenameHash = `${hash}-${file}`;
+
+        let size = 0;
         
-        fs.writeFileSync(`uploads/${filenameHash}`, buffer);
+        const createFile = fs.createWriteStream(`uploads/${filenameHash}`);
+        
+        createFile.write(buffer, () => {
+            size = fs.statSync(`uploads/${filenameHash}`).size;
+        });
         
         const newFile = await this.filesRepository.create({
             name,
             description,
             file: filenameHash,
             type: typeFile,
+            size,
             user,
         });
 

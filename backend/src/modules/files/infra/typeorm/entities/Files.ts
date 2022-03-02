@@ -25,6 +25,9 @@ export class Files {
     @Column()
     type: string;
 
+    @Column()
+    size: number;
+
     @ManyToOne(_ => User, user => user.posted_files)
     user: User;
 

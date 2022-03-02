@@ -11,12 +11,13 @@ export class FilesRepository implements IFilesRepository {
         this.ormRepository = getRepository(Files);
     }
 
-    public async create({ name, file, type, description, user }: ICreateFile): Promise<IFiles> {
+    public async create({ name, description, file, type, size, user }: ICreateFile): Promise<IFiles> {
         return this.ormRepository.create({ 
             name, 
             description,
             file,
             type,
+            size,
             user,
         });
     }
@@ -30,7 +31,10 @@ export class FilesRepository implements IFilesRepository {
     }
 
     public async find(): Promise<IFiles[]> {
-        return this.ormRepository.find();
+        return this.ormRepository.find({
+            take: 100,
+            relations: ['user'],
+        });
     }
 
     public async findById(id: number): Promise<IFiles> {
@@ -42,13 +46,6 @@ export class FilesRepository implements IFilesRepository {
             where: {
                 name: Like(name),
             },
-            relations: ['user'],
-        });
-    }
-
-    public async findPaginate(): Promise<IFiles[]> {
-        return this.ormRepository.find({
-            take: 100,
             relations: ['user'],
         });
     }

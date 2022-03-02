@@ -5,6 +5,7 @@ export interface ICreateFile {
     description: string;
     file: string;
     user: User;
+    size?: number;
     buffer?: Buffer;
     type?: string;
 }

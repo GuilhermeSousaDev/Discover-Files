@@ -1,5 +1,5 @@
-import FindPaginateService from "@modules/files/services/FindPaginateService";
-import ReadFileService from "@modules/files/services/ReadFileService";
+import ListFilesService from "@modules/files/services/ListFilesService";
+import ShowFileService from "@modules/files/services/ShowFileService";
 import UploadFileService from "@modules/files/services/UploadFileService";
 import DeleteFileService from "@modules/files/services/DeleteFileService";
 import { Request, Response } from "express";
@@ -7,7 +7,7 @@ import { container } from "tsyringe";
 
 export default class FilesController {
     public async index(req: Request, res: Response): Promise<Response> {
-        const listFiles = container.resolve(FindPaginateService);
+        const listFiles = container.resolve(ListFilesService);
 
         const files = await listFiles.execute();
 
@@ -15,38 +15,30 @@ export default class FilesController {
     }
 
     public async show(req: Request, res: Response): Promise<Response> {
-        try {
-            const { id } = req.params;
+        const { id } = req.params;
 
-            const readFile = container.resolve(ReadFileService);
+        const showFile = container.resolve(ShowFileService);
 
-            const file = await readFile.execute({ id });
+        const file = await showFile.execute(Number(id));
 
-            return res.json(file);
-        } catch (e) {
-            return res.json(e);
-        }
+        return res.json(file);
     }
 
     public async create(req: Request, res: Response): Promise<Response> {
-        try {
-            const { name, description, user } = req.body;
-            const { originalname, buffer } = req.file;
+        const { name, description, user } = req.body;
+        const { originalname, buffer } = req.file;
 
-            const uploadFile = container.resolve(UploadFileService);
+        const uploadFile = container.resolve(UploadFileService);
 
-            const file = await uploadFile.execute({ 
-                name,  
-                description,
-                file: originalname,
-                buffer,
-                user,
-            });
+        const file = await uploadFile.execute({ 
+            name,  
+            description,
+            file: originalname,
+            buffer,
+            user,
+        });
 
-            return res.json(file);
-        } catch (error) {
-            console.log(error);
-        }
+        return res.json(file);  
     }
 
     public async delete(req: Request, res: Response): Promise<Response> {
@@ -54,7 +46,7 @@ export default class FilesController {
 
         const deleteFile = container.resolve(DeleteFileService);
 
-        const file = await deleteFile.execute(Number(id));
+        await deleteFile.execute(Number(id));
 
         return res.json('Deletado com Sucesso!');
     }

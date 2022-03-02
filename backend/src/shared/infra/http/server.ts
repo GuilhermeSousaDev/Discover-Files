@@ -30,8 +30,8 @@ class App {
     private routes() {
         this.app.use(express.json());
         this.app.use(express.urlencoded());
-        this.app.use(router);
         this.app.use('/files', express.static('uploads/'));
+        this.app.use(router);
         this.app.use(errors());
         this.app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
             if(error instanceof AppError) {
