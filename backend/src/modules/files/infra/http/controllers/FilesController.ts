@@ -25,7 +25,7 @@ export default class FilesController {
     }
 
     public async create(req: Request, res: Response): Promise<Response> {
-        const { name, description, user } = req.body;
+        const { name, description, category, user } = req.body;
         const { originalname, buffer } = req.file;
 
         const uploadFile = container.resolve(UploadFileService);
@@ -33,9 +33,10 @@ export default class FilesController {
         const file = await uploadFile.execute({ 
             name,  
             description,
-            file: originalname,
-            buffer,
+            category,
             user,
+            buffer,
+            file: originalname,
         });
 
         return res.json(file);  

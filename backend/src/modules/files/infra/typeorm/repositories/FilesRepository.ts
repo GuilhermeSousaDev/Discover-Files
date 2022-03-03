@@ -1,7 +1,7 @@
 import { ICreateFile } from "@modules/files/domain/models/ICreateFile";
 import { IFiles } from "@modules/files/domain/models/IFiles";
 import { IFilesRepository } from "@modules/files/domain/repositories/IFilesRepository";
-import { DeleteResult, getRepository, Like, Repository } from "typeorm";
+import { getRepository, In, Like, Repository } from "typeorm";
 import { Files } from "../entities/Files";
 
 export class FilesRepository implements IFilesRepository {
@@ -11,12 +11,21 @@ export class FilesRepository implements IFilesRepository {
         this.ormRepository = getRepository(Files);
     }
 
-    public async create({ name, description, file, type, size, user }: ICreateFile): Promise<IFiles> {
+    public async create({ 
+        name, 
+        description, 
+        file, 
+        type, 
+        category,
+        size, 
+        user,
+    }: ICreateFile): Promise<IFiles> {
         return this.ormRepository.create({ 
             name, 
             description,
             file,
             type,
+            category,
             size,
             user,
         });
@@ -33,7 +42,6 @@ export class FilesRepository implements IFilesRepository {
     public async find(): Promise<IFiles[]> {
         return this.ormRepository.find({
             take: 100,
-            relations: ['user'],
         });
     }
 
@@ -46,7 +54,14 @@ export class FilesRepository implements IFilesRepository {
             where: {
                 name: Like(name),
             },
-            relations: ['user'],
+        });
+    }
+
+    public async findFilesByCategory(category: string): Promise<IFiles[]> {
+        return this.ormRepository.find({
+            where: {
+                category,
+            }
         });
     }
 }

@@ -6,6 +6,7 @@ export interface IFiles {
     description: string;
     file: string;
     type: string;
+    category: string;
     size: number;
     user: IUser;
     createdAt: Date;

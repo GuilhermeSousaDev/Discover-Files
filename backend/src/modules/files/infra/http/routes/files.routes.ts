@@ -29,6 +29,7 @@ filesRouter.post(
         [Segments.BODY]: {
             name: Joi.string().required(),
             description: Joi.string().required(),
+            category: Joi.string().required(),
             user: Joi.string().required(),
         }
     }),

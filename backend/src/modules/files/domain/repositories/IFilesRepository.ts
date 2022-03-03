@@ -8,4 +8,5 @@ export interface IFilesRepository {
     find(): Promise<IFiles[]>;  
     findById(id: number): Promise<IFiles>;
     findFiles(name: string): Promise<IFiles[]>;
+    findFilesByCategory(category: string): Promise<IFiles[]>;
 }
