@@ -1,4 +1,12 @@
-import React, { ChangeEvent, FC, useCallback, useContext, useState } from 'react';
+import React, { 
+    ChangeEvent, 
+    FC, 
+    useCallback, 
+    useContext, 
+    useEffect, 
+    useState,
+} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../../pages/Upload/style';
 import api from '../../services/Axios';
 import { AuthContext } from '../../services/Context';
@@ -9,11 +17,27 @@ interface IData {
 
 interface IProp {
     file: File & { preview: string };
+    setMsg: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ModalSendData: FC<IProp> = ({ file }) => {
+interface IProgress {
+    loaded: number;
+    total: number;
+}
+
+const ModalSendData: FC<IProp> = ({ file, setMsg }) => {
     const { token, user } = useContext(AuthContext);
+    //navigate = useNavigate();
+
     const [data, setData] = useState<IData>();
+    const [progress, setProgress] = useState<IProgress>();
+
+    /*useEffect(() => {
+        if(progress?.loaded === progress?.total) {
+            setMsg('Upload Finalizado!');
+            setTimeout(() => navigate('/files'), 2000);
+        }
+    }, [progress, setMsg, navigate]);*/
 
     const handleData = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setData({
@@ -35,6 +59,13 @@ const ModalSendData: FC<IProp> = ({ file }) => {
                 headers: {
                     Authorization: token as string,
                 },
+                onUploadProgress: (progressEvent) => {
+                    console.log(progressEvent);
+                    setProgress({
+                        loaded: progressEvent.loaded,
+                        total: progressEvent.total,
+                    });
+                },
             });
 
             console.log(request);
@@ -43,6 +74,11 @@ const ModalSendData: FC<IProp> = ({ file }) => {
 
     return (
         <>
+            <progress 
+                value={progress?.loaded} 
+                max={progress?.total}>
+            </progress>
+            <br />
             <input 
                 onChange={handleData}
                 type="text" 
@@ -55,7 +91,8 @@ const ModalSendData: FC<IProp> = ({ file }) => {
                 placeholder='Description' 
                 name='description'
             />
-            <Button onClick={sendFile}>Send Data</Button>
+            <br />
+            <Button onClick={sendFile}>Send Data</Button>  
         </>
     )
 };

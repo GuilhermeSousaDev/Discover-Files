@@ -13,6 +13,7 @@ export const Container = styled.div`
 export const Title = styled.h2`
     text-align: center;
     margin-bottom: 1rem;
+    margin-top: 1rem;
     font-family: 'IBM Plex Sans', sans-serif;
 `;
 

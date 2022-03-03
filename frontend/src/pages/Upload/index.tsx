@@ -1,17 +1,30 @@
 import React, { 
     FC,
     useState,
+    useEffect,
+    useContext,
 } from 'react';
 import { FiUpload } from 'react-icons/fi';
-import { Container, Text, UploadContainer } from './style';
 import { useDropzone } from 'react-dropzone';
+import { useNavigate } from 'react-router-dom';
+import { Container, Text, UploadContainer } from './style';
+import { AuthContext } from '../../services/Context';
 import Navbar from '../../components/Navbar';
 import ModalSendData from '../../components/Modal/ModalSendData';
 
 const Upload: FC = () => {
+    const { isAuth } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const [file, setFile] = useState<File & {preview: string}>();
     const [color, setColor] = useState<string>('#fff');
     const [msg, setMsg] = useState<string>('Clique ou Arraste o Arquivo');
+
+    useEffect(() => {
+        if(!isAuth) {
+            navigate('/login');
+        }
+    }, [isAuth, navigate]);
     
     const { getRootProps }  = useDropzone({
         onDrop: acceptedFiles => {
@@ -40,11 +53,11 @@ const Upload: FC = () => {
                     <Text>{msg}</Text>
                 </UploadContainer>
                 {
-                        file?
-                            <>
-                                <img src={file.preview} alt="" /> 
-                                <ModalSendData file={file} />
-                            </> : ''
+                    file?
+                        <>
+                            <img src={file.preview} alt="" /> 
+                            <ModalSendData file={file} setMsg={setMsg} />
+                        </> : ''
                 }
                 
             </Container>
