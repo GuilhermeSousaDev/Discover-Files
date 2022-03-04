@@ -10,6 +10,23 @@ export const Container = styled.li`
     }
 `;
 
+export const LiContainer = styled.li`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    list-style-type: none;
+    padding: 5px;
+`;
+
 export const Button = styled.button`
     display: inline-block;
     font-weight: 400;
@@ -30,6 +47,11 @@ export const Button = styled.button`
 
 export const Title = styled.h2`
     text-align: center;
+    margin-bottom: 1rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+`;
+
+export const Text = styled.p`
     margin-bottom: 1rem;
     font-family: 'IBM Plex Sans', sans-serif;
 `;

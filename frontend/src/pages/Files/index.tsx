@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import ListFiles from '../../components/List/files';
 import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
-import { Container, Title } from './style';
+import { Container, Title, UlContainer } from './style';
 
 interface IUser {
     id: number;
@@ -44,14 +44,14 @@ const Files: FC = () => {
             <Container>
                 <Title>Melhores Arquivos</Title>
 
-                <ul>
+                <UlContainer>
                     { files?.length? 
                         files.map(file => 
                             <ListFiles key={file.id} files={file} />
                         )
                         : '...Loading' 
                     }
-                </ul>
+                </UlContainer>
             </Container>
         </>
     )

@@ -10,6 +10,13 @@ export const Container = styled.div`
     }
 `;
 
+export const UlContainer = styled.ul`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+`;
+
 export const Title = styled.h2`
     text-align: center;
     margin-bottom: 1rem;
@@ -17,11 +24,14 @@ export const Title = styled.h2`
     font-family: 'IBM Plex Sans', sans-serif;
 `;
 
-export const Desc = styled.span`
+export const Desc = styled.p`
     text-align: center;
     margin-bottom: 1rem;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
 export const Text = styled.span`

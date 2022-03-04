@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container } from './style';
+import { Button, Container, LiContainer, Text } from './style';
 
 interface IUser {
     id: number;
@@ -28,16 +28,16 @@ interface IProp {
 const ListFiles: FC<IProp> = ({ files }) => {
     return (
         <Container>
-            <div>
-                ID: { files.id } <br />
-                Name: { files.name } <br />
-                Description: { files.description } <br />
+            <LiContainer>
+                <Text>ID: { files.id }</Text>
+                <Text>Name: { files.name }</Text>
+                <Text>Author: { files.user.name }</Text>
                 Filename: { files.file.split('-')[1] } <br />
-                Type: { files.type } <br />
+                Type : { files.type } <br />
                 <Link to={`/files/${files.id}`}>
                     <Button>Ver Arquivo</Button>
                 </Link>
-            </div>
+            </LiContainer>
         </Container>
     )
 }

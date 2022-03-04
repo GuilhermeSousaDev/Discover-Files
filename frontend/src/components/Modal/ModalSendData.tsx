@@ -53,6 +53,7 @@ const ModalSendData: FC<IProp> = ({ file, setMsg }) => {
             form.append('file', file);  
             form.append('name', data.name);
             form.append('description', data.description);
+            form.append('category', data.category);
             form.append('user', user.id);
 
             const request = await api.post('/files', form, { 
@@ -90,6 +91,12 @@ const ModalSendData: FC<IProp> = ({ file, setMsg }) => {
                 type="text" 
                 placeholder='Description' 
                 name='description'
+            />
+            <input 
+                onChange={handleData}
+                type="text" 
+                placeholder='Category' 
+                name='category'
             />
             <br />
             <Button onClick={sendFile}>Send Data</Button>  
