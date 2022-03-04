@@ -7,7 +7,6 @@ export interface IFiles {
     file: string;
     type: string;
     category: string;
-    size: number;
     user: IUser;
     createdAt: Date;
     updatedAt: Date;

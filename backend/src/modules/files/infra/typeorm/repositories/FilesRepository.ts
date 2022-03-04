@@ -17,7 +17,6 @@ export class FilesRepository implements IFilesRepository {
         file, 
         type, 
         category,
-        size, 
         user,
     }: ICreateFile): Promise<IFiles> {
         return this.ormRepository.create({ 
@@ -26,7 +25,6 @@ export class FilesRepository implements IFilesRepository {
             file,
             type,
             category,
-            size,
             user,
         });
     }

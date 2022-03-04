@@ -39,7 +39,7 @@ export default class FilesController {
             file: originalname,
         });
 
-        return res.json(file);  
+        return res.json(file); 
     }
 
     public async delete(req: Request, res: Response): Promise<Response> {

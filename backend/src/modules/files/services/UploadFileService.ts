@@ -34,8 +34,6 @@ export default class UploadFileService {
         const createFile = fs.createWriteStream(`uploads/${filenameHash}`);
         
         createFile.write(buffer);
-
-        const size = fs.statSync(`uploads/${filenameHash}`).size;
         
         const newFile = await this.filesRepository.create({
             name,
@@ -43,7 +41,7 @@ export default class UploadFileService {
             file: filenameHash,
             type: typeFile,
             category,
-            size,
+            size: 0,
             user,
         });
 

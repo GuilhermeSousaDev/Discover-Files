@@ -7,6 +7,7 @@ import { errors } from 'celebrate';
 import router from './routes/index.routes';
 import AppError from '@shared/errors/AppError';
 import { limiter } from './middlewares/rateLimiter';
+import fs from 'fs';
 
 import '@shared/infra/typeorm';
 import '@shared/container';

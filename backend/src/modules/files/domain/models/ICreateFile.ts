@@ -6,7 +6,6 @@ export interface ICreateFile {
     file: string;
     user: IUser;
     category: string;
-    size?: number;
     buffer?: Buffer;
     type?: string;
 }

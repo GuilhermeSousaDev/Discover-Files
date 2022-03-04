@@ -28,9 +28,6 @@ export class Files {
     @Column()
     category: string;
 
-    @Column()
-    size: number;
-
     @ManyToOne(_ => User, user => user.posted_files, { eager: true })
     user: User;
 
