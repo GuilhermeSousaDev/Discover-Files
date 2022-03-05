@@ -9,7 +9,7 @@ import {
     ButtonContainer,
     Right,
 } from './style';
-import { FcUpload } from 'react-icons/fc';
+import uploadImg from '../../images/upload.png';
 import Navbar from '../../components/Navbar';
 
 const Home: FC = () => {
@@ -48,7 +48,10 @@ const Home: FC = () => {
                     </ButtonContainer>
                 </Left>
                 <Right>
-                    <FcUpload />
+                    <img style={{
+                        width: '600px',
+                        height: '500px',
+                    }} src={uploadImg} alt="upload_image" />
                 </Right>
             </Container>
         </>
