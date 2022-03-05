@@ -31,17 +31,18 @@ export default class UploadFileService {
 
         const filenameHash = `${hash}-${file}`;
         
-        const createFile = fs.createWriteStream(`uploads/${filenameHash}`);
-        
+        const createFile = fs.createWriteStream(`uploads/${filenameHash}`, { 
+            highWaterMark: 30
+        });
+
         createFile.write(buffer);
-        
+
         const newFile = await this.filesRepository.create({
             name,
             description,
             file: filenameHash,
             type: typeFile,
             category,
-            size: 0,
             user,
         });
 
