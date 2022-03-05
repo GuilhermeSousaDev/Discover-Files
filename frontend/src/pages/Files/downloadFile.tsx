@@ -16,14 +16,18 @@ interface IUser {
 }
 
 interface IFile {
-    id: number
-    name: string
-    description: string
-    type: string
-    file: string
-    user: IUser;
-    createdAt: Date;
-    updatedAt: Date;
+    file: {
+        id: number
+        name: string
+        description: string
+        category: string;
+        type: string
+        file: string
+        user: IUser;
+        createdAt: Date;
+        updatedAt: Date;
+    }
+    size: string;
 }
 
 const DownloadFile: FC = () => {
@@ -33,8 +37,6 @@ const DownloadFile: FC = () => {
     useEffect(() => {
         (async () => {
             const { data } = await api.get<IFile>(`files/${id}`);
-
-            console.log(data);
 
             setFile(data);
         })();
@@ -46,12 +48,14 @@ const DownloadFile: FC = () => {
             <Container>
                 {file?
                     <>
-                        <Title>{file.name}</Title>  
-                        <Desc>{file.description}</Desc>
-                        <Text>Type: {file.type}</Text>
-                        <Text>{file.file}</Text>
-                        <Title>Uploaded_By - {file.user.name}</Title>
-                        <a href={`http://localhost:8081/files/${file.file}`} 
+                        <Title>{file.file.name}</Title>  
+                        <Desc>{file.file.description}</Desc>
+                        <Text>Type: {file.file.type}</Text>
+                        <Text>Category: {file.file.category}</Text>
+                        <Text>{file.file.file}</Text>
+                        <Title>Uploaded_By - {file.file.user.name}</Title>
+                        <Text>Size: {file.size}</Text>
+                        <a href={`http://localhost:8081/files/${file.file.file}`} 
                         download target="_blank" rel="noreferrer">
                             <Button>Download <FiDownload /></Button>
                         </a>

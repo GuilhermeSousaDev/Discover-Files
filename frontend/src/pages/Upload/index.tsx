@@ -56,7 +56,11 @@ const Upload: FC = () => {
                     file?
                         <>
                             <img src={file.preview} alt="" /> 
-                            <ModalSendData file={file} setMsg={setMsg} />
+                            <ModalSendData 
+                                msg={msg}
+                                file={file} 
+                                setMsg={setMsg} 
+                            />
                         </> : ''
                 }
                 
