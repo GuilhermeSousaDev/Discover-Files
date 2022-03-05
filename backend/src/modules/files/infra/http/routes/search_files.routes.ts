@@ -7,19 +7,9 @@ const searchFilesRouter = Router();
 const searchFileController = new SearchFilesController();
 
 searchFilesRouter.get(
-    '/:category', 
+    '/:name', 
     celebrate({
         [Segments.PARAMS]: {
-            category: Joi.string().required(),
-        }
-    }),
-    searchFileController.show,
-);
-
-searchFilesRouter.post(
-    '/', 
-    celebrate({
-        [Segments.BODY]: {
             name: Joi.string().required(),
         }
     }),

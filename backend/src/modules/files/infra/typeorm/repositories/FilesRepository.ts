@@ -1,7 +1,7 @@
 import { ICreateFile } from "@modules/files/domain/models/ICreateFile";
 import { IFiles } from "@modules/files/domain/models/IFiles";
 import { IFilesRepository } from "@modules/files/domain/repositories/IFilesRepository";
-import { getRepository, In, Like, Repository } from "typeorm";
+import { getRepository, Like, Repository } from "typeorm";
 import { Files } from "../entities/Files";
 
 export class FilesRepository implements IFilesRepository {
@@ -50,7 +50,7 @@ export class FilesRepository implements IFilesRepository {
     public async findFiles(name: string): Promise<IFiles[] | undefined> {
         return this.ormRepository.find({
             where: {
-                name: Like(name),
+                name: Like(`%${name}%`),
             },
         });
     }
