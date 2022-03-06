@@ -4,6 +4,7 @@ import { Register } from './pages/Auth/Register';
 import Files from './pages/Files';
 import DownloadFile from './pages/Files/downloadFile';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 import Search from './pages/Search';
 import Upload from './pages/Upload';
 
@@ -19,6 +20,7 @@ export default function Router() {
                     <Route path='/files' element={<Files />} />
                     <Route path='/files/:id' element={<DownloadFile />} />
                     <Route path='/search' element={<Search />} />
+                    <Route path='/profile' element={<Profile />} />
                 </Routes>
             </BrowserRouter>
         </>

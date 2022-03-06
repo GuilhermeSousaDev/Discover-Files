@@ -147,7 +147,7 @@ export const Button = styled.button`
 `;
 
 export const Response = styled.span`
-  background: #ff4343;
+  background: ${(props) => props.color};
   color: #000;
   border-radius: 10px;
   padding: 10px;

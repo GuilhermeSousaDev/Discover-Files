@@ -17,7 +17,7 @@ const Navbar: FC = () => {
             </Link>
             {
                 isAuth?
-                <Link to={'/perfil'}><SignOrProfile>Perfil</SignOrProfile></Link> :
+                <Link to={'/profile'}><SignOrProfile>Profile</SignOrProfile></Link> :
                 <Link to={'/login'}><SignOrProfile>Sign in</SignOrProfile></Link>
             }
         </Nav>
