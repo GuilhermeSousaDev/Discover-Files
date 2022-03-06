@@ -2,15 +2,15 @@ import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Nav, Title, SignOrProfile } from './style';
 import { FiUpload } from 'react-icons/fi';
-import { AuthContext } from '../../services/Context/'
+import { AuthContext } from '../../services/Context/';
 
 const Navbar: FC = () => {
     const { isAuth } = useContext(AuthContext);
 
     return (
         <Nav>
-            <Link to={'/upload'}>
-                <Button>Upload Files</Button>
+            <Link to={'/search'}>
+                <Button>Search Files</Button>
             </Link>
             <Link to={'/'}>
                 <Title><FiUpload />DropFile</Title>

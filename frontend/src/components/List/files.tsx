@@ -13,7 +13,7 @@ interface IUser {
 }
 
 interface IProp {
-    files: {
+    file: {
         id: number
         name: string
         description: string
@@ -25,16 +25,16 @@ interface IProp {
     }
 }
 
-const ListFiles: FC<IProp> = ({ files }) => {
+const ListFiles: FC<IProp> = ({ file }) => {
     return (
         <Container>
             <LiContainer>
-                <Text>ID: { files.id }</Text>
-                <Text>Name: { files.name }</Text>
-                <Text>Author: { files.user.name }</Text>
-                Filename: { files.file.split('-')[1] } <br />
-                Type : { files.type } <br />
-                <Link to={`/files/${files.id}`}>
+                <Text>ID: { file.id }</Text>
+                <Text>Name: { file.name }</Text>
+                <Text>Author: { file.user.name }</Text>
+                Filename: { file.file.split('-')[1] } <br />
+                Type : { file.type } <br />
+                <Link to={`/files/${file.id}`}>
                     <Button>Ver Arquivo</Button>
                 </Link>
             </LiContainer>

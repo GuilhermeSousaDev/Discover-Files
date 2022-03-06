@@ -47,7 +47,7 @@ const Files: FC = () => {
                 <UlContainer>
                     { files?.length? 
                         files.map(file => 
-                            <ListFiles key={file.id} files={file} />
+                            <ListFiles key={file.id} file={file} />
                         )
                         : '...Loading' 
                     }

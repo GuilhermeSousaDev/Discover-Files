@@ -55,8 +55,10 @@ const DownloadFile: FC = () => {
                         <Text>{file.file.file}</Text>
                         <Title>Uploaded_By - {file.file.user.name}</Title>
                         <Text>Size: {file.size}</Text>
-                        <a href={`http://localhost:8081/files/${file.file.file}`} 
-                        download target="_blank" rel="noreferrer">
+                        <a 
+                            href={`http://localhost:8081/files/${file.file.file}`} 
+                            download target="_blank" rel="noreferrer"
+                        >
                             <Button>Download <FiDownload /></Button>
                         </a>
                     </>
