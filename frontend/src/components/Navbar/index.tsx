@@ -5,7 +5,7 @@ import { FiUpload } from 'react-icons/fi';
 import { AuthContext } from '../../services/Context/';
 
 const Navbar: FC = () => {
-    const { isAuth } = useContext(AuthContext);
+    const { isAuth, user } = useContext(AuthContext);
 
     return (
         <Nav>
@@ -17,7 +17,7 @@ const Navbar: FC = () => {
             </Link>
             {
                 isAuth?
-                <Link to={'/profile'}><SignOrProfile>Profile</SignOrProfile></Link> :
+                <Link to={`profile/${user?.id}`}><SignOrProfile>Profile</SignOrProfile></Link> :
                 <Link to={'/login'}><SignOrProfile>Sign in</SignOrProfile></Link>
             }
         </Nav>

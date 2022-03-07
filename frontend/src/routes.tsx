@@ -20,7 +20,7 @@ export default function Router() {
                     <Route path='/files' element={<Files />} />
                     <Route path='/files/:id' element={<DownloadFile />} />
                     <Route path='/search' element={<Search />} />
-                    <Route path='/profile' element={<Profile />} />
+                    <Route path='/profile/:id' element={<Profile />} />
                 </Routes>
             </BrowserRouter>
         </>

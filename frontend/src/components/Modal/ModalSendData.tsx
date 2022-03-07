@@ -28,7 +28,7 @@ const ModalSendData: FC<IProp> = ({ file, setMsg, msg }) => {
     const { token, user } = useContext(AuthContext);
 
     const [data, setData] = useState<IData>();
-    const [category, setCategory] = useState<string>();
+    const [category, setCategory] = useState<string>('Other');
     const [progress, setProgress] = useState<IProgress>();
 
     const handleData = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -92,12 +92,13 @@ const ModalSendData: FC<IProp> = ({ file, setMsg, msg }) => {
                         placeholder='Description' 
                         name='description'
                     />
-                    <select onChange={handleSelectData} name="category">
+                    <select onChange={handleSelectData} defaultValue="Other">
                         <option value="App">App</option>
                         <option value="Image">Image</option>
                         <option value="Video">Video</option>
                         <option value="Book">Book</option>
                         <option value="pdf">PDF</option>
+                        <option value="Other">Other</option>
                     </select>
                     <br />
                     <Button onClick={sendFile}>Send Data</Button> 
