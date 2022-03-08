@@ -1,9 +1,17 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { 
+    FC, 
+    useContext, 
+    useEffect,
+    useState,
+    useCallback,
+} from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
 import { AuthContext } from '../../services/Context';
-import { Container } from './style';
+import { Container, Title, Button, NameProfile } from './style';
+import avatarEmpty from '../../images/avatar_empty.png';
+import ModalChangeAvatar from '../../components/Modal/ModalChangeAvatar';
 
 interface IUser {
     id: number;
@@ -20,6 +28,7 @@ const Profile: FC = () => {
     const { id } = useParams();
 
     const [data, setData] = useState<IUser>();
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     useEffect(() => {
         (async () => {
@@ -34,15 +43,40 @@ const Profile: FC = () => {
             }
         })();
     }, [data, token, id]);
+
+    const handleShowModal = useCallback(() => {
+        showModal === true? 
+            setShowModal(false) : setShowModal(true);
+    }, [showModal]);
+
     return (
         <>
             <Navbar />
             <Container>
                 {data?
                    <>
-                    {data.name} <br />
-                    {data.email} <br />
-                    
+                    <Title>Profile</Title>
+                    <NameProfile>{data.name}</NameProfile>
+            
+                    {data.avatar?
+                        <img 
+                            onClick={handleShowModal}
+                            src={`http://localhost:8081/files/${data.avatar}`} 
+                            alt="user_avatar"
+                        /> :
+                        <img 
+                            onClick={handleShowModal}
+                            src={avatarEmpty} 
+                            alt="avatar_empty" 
+                        />
+                    }
+
+                    {showModal?
+                        <ModalChangeAvatar /> : ''
+                    }
+                    <br />
+                    <span>{data.email}</span>
+                    <Button>Editar</Button>
                    </> : '...Loading'
                 }
             </Container>
