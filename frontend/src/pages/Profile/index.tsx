@@ -57,11 +57,17 @@ const Profile: FC = () => {
                    <>
                     <Title>Profile</Title>
                     <NameProfile>{data.name}</NameProfile>
-            
+                    <br />
                     {data.avatar?
                         <img 
+                            style={{
+                                width: '150px',
+                                height: '150px',
+                                borderRadius: '50%',
+                                border: '2px solid #000',
+                            }}
                             onClick={handleShowModal}
-                            src={`http://localhost:8081/files/${data.avatar}`} 
+                            src={`http://localhost:8081/avatar/${data.avatar}`} 
                             alt="user_avatar"
                         /> :
                         <img 
