@@ -18,6 +18,7 @@ userRouter.get(
     }),
     userController.show,
 );
+
 userRouter.post(
     '/', 
     celebrate({
@@ -29,7 +30,8 @@ userRouter.post(
     }),
     userController.create,
 );
-userRouter.get( 
+
+userRouter.delete( 
     '/:id', 
     isAuthenticated,
     celebrate({

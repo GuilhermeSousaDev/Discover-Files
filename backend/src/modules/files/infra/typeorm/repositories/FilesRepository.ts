@@ -33,8 +33,8 @@ export class FilesRepository implements IFilesRepository {
         return this.ormRepository.save(file);
     }
 
-    public async remove(file: Files): Promise<IFiles> {
-        return this.ormRepository.remove(file);
+    public async remove(file: Files): Promise<void> {
+        this.ormRepository.remove(file);
     }
 
     public async find(): Promise<IFiles[]> {
@@ -59,6 +59,14 @@ export class FilesRepository implements IFilesRepository {
         return this.ormRepository.find({
             where: {
                 category,
+            }
+        });
+    }
+
+    public async findFilesByUser(userId: number): Promise<IFiles[]> {
+        return this.ormRepository.find({
+            where: {
+                user: userId,
             }
         });
     }

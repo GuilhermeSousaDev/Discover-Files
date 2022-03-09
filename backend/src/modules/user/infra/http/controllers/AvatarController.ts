@@ -5,7 +5,7 @@ import { container } from "tsyringe";
 export default class AvatarController {
     public async update(req: Request, res: Response): Promise<Response> {
         const { originalname, buffer } = req.file;
-        const { id } = req.params;
+        const { id } = req.user;
 
         const updateAvatar = container.resolve(UpdateUserAvatarService);
 

@@ -11,11 +11,11 @@ export class UserRepository implements IUserRepository {
     }
 
     public async save(user: IUser): Promise<void> {
-        this.ormRepository.save(user);
+        await this.ormRepository.save(user);
     }
 
-    public async remove(user: IUser): Promise<void> {
-        this.ormRepository.delete(user);
+    public async remove(user: User): Promise<void> {
+        this.ormRepository.remove(user);
     }
 
     public async create({ name, email, password }: ICreateUser): Promise<IUser> {

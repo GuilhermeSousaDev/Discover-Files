@@ -1,4 +1,5 @@
 import fs from 'fs';
+import crypto from 'crypto';
 import AppError from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 import { ICreateAvatar } from "../domain/models/ICreateAvatar";
@@ -20,7 +21,7 @@ export default class UpdateUserAvatarService {
         }
 
         if(user.avatar) {
-            const path = `uploads/${user.avatar}`
+            const path = `uploads_avatar/${user.avatar}`
             const fileExists = fs.statSync(path);
 
             if(fileExists) {
@@ -28,7 +29,20 @@ export default class UpdateUserAvatarService {
             }
         }
 
-        fs.writeFileSync(`uploads/${avatar.filename}`, avatar.buffer);
+        const acceptedTypes = ['jpg', 'jpeg', 'png'];
+
+        const [, typeFile] = avatar.filename.split('.');
+
+        for(let i = 0; i < acceptedTypes.length; i++) {
+            if(typeFile !== acceptedTypes[i]) {
+                throw new AppError('The accepted types are jpg, png, jpeg');
+            }
+        }
+        
+        const hash = crypto.randomBytes(10).toString('hex');
+        const filenameHash = `${hash}-${avatar.filename}`;
+
+        fs.writeFileSync(`uploads_avatar/${filenameHash}`, avatar.buffer);
 
         user.avatar = avatar.filename;
 

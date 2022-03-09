@@ -13,11 +13,6 @@ avatarRouter.put(
     '/', 
     isAuthenticated,
     multerConfig.single('file'),
-    celebrate({
-        [Segments.PARAMS]: {
-            id: Joi.number().required(),
-        }
-    }),
     avatarController.update,
 );
 

@@ -32,6 +32,7 @@ class App {
         this.app.use(express.json());
         this.app.use(express.urlencoded());
         this.app.use('/files', express.static('uploads/'));
+        this.app.use('/avatar', express.static('uploads_avatar/'));
         this.app.use(router);
         this.app.use(errors());
         this.app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
