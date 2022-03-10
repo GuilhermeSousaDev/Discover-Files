@@ -5,13 +5,13 @@ import React, {
     useState,
     useCallback,
 } from 'react';
-import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
 import { AuthContext } from '../../services/Context';
 import { Container, Title, Button, NameProfile } from './style';
 import avatarEmpty from '../../images/avatar_empty.png';
 import ModalChangeAvatar from '../../components/Modal/ModalChangeAvatar';
+import UserFiles from '../../components/List/userFiles';
 
 interface IUser {
     id: number;
@@ -24,15 +24,14 @@ interface IUser {
 }
 
 const Profile: FC = () => {
-    const { token } = useContext(AuthContext);
-    const { id } = useParams();
+    const { token, user } = useContext(AuthContext);
 
     const [data, setData] = useState<IUser>();
     const [showModal, setShowModal] = useState<boolean>(false);
 
     useEffect(() => {
         (async () => {
-            const request = await api.get(`/user/${id}`, {
+            const request = await api.get(`/user/${user?.id}`, {
                 headers: {
                     Authorization: token as string,
                 }
@@ -42,7 +41,7 @@ const Profile: FC = () => {
                 setData(request.data);
             }
         })();
-    }, [data, token, id]);
+    }, [data, token, user]);
 
     const handleShowModal = useCallback(() => {
         showModal === true? 
@@ -85,6 +84,8 @@ const Profile: FC = () => {
                     <Button>Editar</Button>
                    </> : '...Loading'
                 }
+
+                <UserFiles />
             </Container>
         </>         
     )
