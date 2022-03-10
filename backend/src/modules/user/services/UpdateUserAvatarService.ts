@@ -33,10 +33,10 @@ export default class UpdateUserAvatarService {
 
         const [, typeFile] = avatar.filename.split('.');
 
-        for(let i = 0; i < acceptedTypes.length; i++) {
-            if(typeFile !== acceptedTypes[i]) {
-                throw new AppError('The accepted types are jpg, png, jpeg');
-            }
+        const type = acceptedTypes.includes(typeFile);
+
+        if(!type) {
+            throw new AppError('Just is permited files of type jpg, png, jpeg');
         }
         
         const hash = crypto.randomBytes(10).toString('hex');
@@ -44,9 +44,9 @@ export default class UpdateUserAvatarService {
 
         fs.writeFileSync(`uploads_avatar/${filenameHash}`, avatar.buffer);
 
-        user.avatar = avatar.filename;
+        user.avatar = filenameHash;
 
-        this.userRepository.save(user);
+        await this.userRepository.save(user);
 
         return user;
     }
