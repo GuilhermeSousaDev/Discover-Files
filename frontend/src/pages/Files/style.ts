@@ -8,6 +8,10 @@ export const Container = styled.div`
     a {
         text-decoration: none;
     }
+    img {
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
 `;
 
 export const UlContainer = styled.ul`
@@ -55,4 +59,5 @@ export const Button = styled.button`
     border-color: #212529;
     font-family: 'Montserrat', sans-serif;
     cursor: pointer;
+    margin-bottom: 1rem;
 `;

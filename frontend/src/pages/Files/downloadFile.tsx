@@ -33,12 +33,14 @@ interface IFile {
 const DownloadFile: FC = () => {
     const { id } = useParams();
     const [file, setFile] = useState<IFile>();
+    const [typeFile, setTypeFile] = useState<string>();
 
     useEffect(() => {
         (async () => {
             const { data } = await api.get<IFile>(`files/${id}`);
 
             setFile(data);
+            setTypeFile(data.file.file.split('.')[1]);
         })();
     }, [id]);
 
@@ -55,6 +57,20 @@ const DownloadFile: FC = () => {
                         <Text>{file.file.file}</Text>
                         <Title>Uploaded_By - {file.file.user.name}</Title>
                         <Text>Size: {file.size}</Text>
+
+                        {typeFile === 'jpg' || typeFile === 'jpeg' || typeFile === 'png'?
+                            <img 
+                                style={{
+                                    width: '180px',
+                                    height: '279px',
+                                    borderRadius: '5px',
+                                }}
+                                src={`http://localhost:8081/files/${file.file.file}`} 
+                                alt="" 
+                            /> 
+                            : ''
+                        }
+
                         <a 
                             href={`http://localhost:8081/files/${file.file.file}`} 
                             download target="_blank" rel="noreferrer"
