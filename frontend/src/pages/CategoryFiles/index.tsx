@@ -3,18 +3,21 @@ import React, {
     useEffect, 
     useState,
 } from 'react';
+import ListFiles from '../../components/List/files';
 import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
-import { Container, InitialDiv, Title } from './style';
+import { IFile } from '../../interfaces/IFile';
+import { Container, InitialDiv, Title, UlContainer } from './style';
 
 const CategoryFiles: FC = () => {
     const [category, setCategory] = useState<string>('app');
+    const [files, setFiles] = useState<IFile[]>();
     
     useEffect(() => {
         (async () => {
-            const request = await api.get(`files/category/${category}`);
+            const { data } = await api.get(`files/category/${category}`);
 
-            console.log(request);
+            setFiles(data);
         })();
     }, [category]);
 
@@ -25,7 +28,7 @@ const CategoryFiles: FC = () => {
                 <InitialDiv>
                     <Title>List Files By Category</Title>
 
-                    <select onChange={e => setCategory(e.target.value)} defaultValue="Other">
+                    <select onChange={e => setCategory(e.target.value)} defaultValue="App">
                         <option value="App">App</option>
                         <option value="Image">Image</option>
                         <option value="Video">Video</option>
@@ -34,6 +37,14 @@ const CategoryFiles: FC = () => {
                         <option value="Other">Other</option>
                     </select>   
                 </InitialDiv>
+
+                <UlContainer>
+                    {files?
+                        files.map(file => 
+                            <ListFiles file={file} />
+                        ): '...Loading'
+                    }
+                </UlContainer>
             </Container>
         </>
     )

@@ -12,16 +12,7 @@ import { Container, Title, Button, NameProfile } from './style';
 import avatarEmpty from '../../images/avatar_empty.png';
 import ModalChangeAvatar from '../../components/Modal/ModalChangeAvatar';
 import UserFiles from '../../components/List/userFiles';
-
-interface IUser {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    avatar: string
-    createdAt: Date;
-    updatedAt: Date;
-}
+import { IUser } from '../../interfaces/IUser';
 
 const Profile: FC = () => {
     const { token, user } = useContext(AuthContext);

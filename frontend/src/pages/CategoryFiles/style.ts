@@ -7,6 +7,13 @@ export const Container = styled.div`
     height: 600px;
 `;
 
+export const UlContainer = styled.ul`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+`;
+
 export const InitialDiv = styled.div`
     display: flex;
     flex-direction: column;

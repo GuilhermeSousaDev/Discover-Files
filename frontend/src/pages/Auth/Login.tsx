@@ -4,7 +4,7 @@ import React, {
     useCallback, 
     useState, 
     useEffect, 
-    useContext 
+    useContext,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../services/Context';
@@ -19,19 +19,10 @@ import {
     Input,
 } from './style';
 import api from '../../services/Axios';
+import { IUser } from '../../interfaces/IUser';
 
 interface IForm {
     [key: string]: string;
-}
-
-interface IUser {
-    id: string;
-    name: string;
-    email: string;
-    password: string;
-    avatar: string;
-    createdAt: Date;
-    updatedAt: Date;
 }
 
 interface IResponse {

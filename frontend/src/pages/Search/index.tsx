@@ -5,33 +5,12 @@ import React, {
 } from 'react';
 import ListFiles from '../../components/List/files';
 import Navbar from '../../components/Navbar';
+import { IFile } from '../../interfaces/IFile';
 import api from '../../services/Axios';
 import { Container, UlContainer } from './style';
 
-interface IUser {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    avatar: string
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-interface IData {
-    id: number;
-    name: string;
-    file: string;
-    description: string;
-    type: string;
-    category: string;
-    user: IUser;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
 const Search: FC = () => {
-    const [data, setData] = useState<IData[]>();
+    const [data, setData] = useState<IFile[]>();
     const [param, setParam] = useState<string>();
 
     useEffect(() => {
