@@ -5,20 +5,6 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     height: 600px;
-    a {
-        text-decoration: none;
-    }
-    img {
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-    }
-`;
-
-export const UlContainer = styled.ul`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
 `;
 
 export const InitialDiv = styled.div`

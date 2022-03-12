@@ -1,8 +1,9 @@
 import React, { FC, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ListFiles from '../../components/List/files';
 import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
-import { Container, Title, UlContainer } from './style';
+import { Button, Container, InitialDiv, Title, UlContainer } from './style';
 
 interface IUser {
     id: number;
@@ -42,7 +43,12 @@ const Files: FC = () => {
         <>
             <Navbar />
             <Container>
-                <Title>Melhores Arquivos</Title>
+                <InitialDiv>
+                    <Title>Melhores Arquivos</Title>
+                    <Link to={'/files/category'}>
+                        <Button>Find By Category</Button>
+                    </Link>
+                </InitialDiv>
 
                 <UlContainer>
                     { files?.length? 
