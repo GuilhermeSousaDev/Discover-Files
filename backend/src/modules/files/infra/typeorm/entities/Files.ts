@@ -28,6 +28,9 @@ export class Files {
     @Column()
     category: string;
 
+    @Column()
+    downloads: number;
+
     @ManyToOne(_ => User, user => user.posted_files, { eager: true })
     user: User;
 

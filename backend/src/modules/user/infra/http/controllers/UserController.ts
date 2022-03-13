@@ -1,5 +1,6 @@
 import CreateUserService from "@modules/user/services/CreateUserService";
 import DeleteUserService from "@modules/user/services/DeleteUserService";
+import EditProfileService from "@modules/user/services/EditProfileService";
 import ListUsersService from "@modules/user/services/ListUsersService";
 import ShowUserService from "@modules/user/services/ShowUserService";
 import { Request, Response } from "express";
@@ -37,9 +38,24 @@ export default class UserController {
             });
 
             return res.json(user);
+
         } catch (error) {
             return res.json(error.message);
         }
+    }
+
+    public async update(req: Request, res: Response): Promise<Response> {
+        const { name, email, password } = req.body;
+
+        const editProfile = container.resolve(EditProfileService);
+
+        const user = await editProfile.execute({ 
+            name, 
+            email, 
+            password,
+        })
+
+        return res.json(user);
     }
 
     public async delete(req: Request, res: Response): Promise<Response> {

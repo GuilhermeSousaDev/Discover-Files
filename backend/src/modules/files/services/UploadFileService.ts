@@ -32,7 +32,7 @@ export default class UploadFileService {
         const filenameHash = `${hash}-${file}`;
         
         const createFile = fs.createWriteStream(`uploads/${filenameHash}`, { 
-            highWaterMark: 30
+            highWaterMark: 30,
         });
 
         createFile.write(buffer);

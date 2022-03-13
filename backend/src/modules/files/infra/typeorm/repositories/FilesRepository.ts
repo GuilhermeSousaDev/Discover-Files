@@ -39,7 +39,10 @@ export class FilesRepository implements IFilesRepository {
 
     public async find(): Promise<IFiles[]> {
         return this.ormRepository.find({
-            take: 100,
+            take: 30,
+            order: {
+                downloads: 'DESC',
+            },
         });
     }
 
@@ -59,7 +62,8 @@ export class FilesRepository implements IFilesRepository {
         return this.ormRepository.find({
             where: {
                 category,
-            }
+            },
+            take: 30,
         });
     }
 
@@ -67,7 +71,7 @@ export class FilesRepository implements IFilesRepository {
         return this.ormRepository.find({
             where: {
                 user: userId,
-            }
+            },
         });
     }
 }
