@@ -18,6 +18,10 @@ export const InitialDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    select {
+        border-radius: 10px;
+        padding: 15px;
+    }
 `;
 
 export const Title = styled.h2`

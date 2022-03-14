@@ -6,6 +6,7 @@ export interface IFile {
     description: string
     type: string
     file: string
+    downloads: number;
     user: IUser;
     createdAt: Date;
     updatedAt: Date;

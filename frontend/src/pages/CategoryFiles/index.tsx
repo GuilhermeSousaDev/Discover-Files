@@ -28,7 +28,10 @@ const CategoryFiles: FC = () => {
                 <InitialDiv>
                     <Title>List Files By Category</Title>
 
-                    <select onChange={e => setCategory(e.target.value)} defaultValue="App">
+                    <select 
+                        onChange={e => setCategory(e.target.value)} 
+                        defaultValue="App"
+                    >
                         <option value="App">App</option>
                         <option value="Image">Image</option>
                         <option value="Video">Video</option>

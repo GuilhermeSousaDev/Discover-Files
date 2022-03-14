@@ -86,12 +86,7 @@ const ModalSendData: FC<IProp> = ({ file, setMsg, msg }) => {
                         placeholder='Name' 
                         name='name'
                     />
-                    <input 
-                        onChange={handleData}
-                        type="text" 
-                        placeholder='Description' 
-                        name='description'
-                    />
+                    textarea
                     <select onChange={handleSelectData} defaultValue="Other">
                         <option value="App">App</option>
                         <option value="Image">Image</option>

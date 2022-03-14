@@ -1,28 +1,8 @@
-import react, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { IFile } from '../../interfaces/IFile';
 import api from '../../services/Axios';
 import { AuthContext } from '../../services/Context';
 import ListFiles from './files';
-
-interface IUser {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    avatar: string
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-interface IFile {
-    id: number
-    name: string
-    description: string
-    type: string
-    file: string
-    user: IUser;
-    createdAt: Date;
-    updatedAt: Date;
-}
 
 const UserFiles: FC = () => {
     const { user, token } = useContext(AuthContext);

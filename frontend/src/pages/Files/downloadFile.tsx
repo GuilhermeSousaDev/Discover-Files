@@ -1,9 +1,10 @@
-import React, { FC, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { FC, useState, useEffect, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
 import { FiDownload } from 'react-icons/fi';
 import { Container, Title, Desc, Text, Button } from './style';
+import { IFile } from '../../interfaces/IFile';
 
 interface IUser {
     id: number;
@@ -15,7 +16,7 @@ interface IUser {
     updatedAt: Date;
 }
 
-interface IFile {
+interface IDownload {
     file: {
         id: number
         name: string
@@ -23,6 +24,7 @@ interface IFile {
         category: string;
         type: string
         file: string
+        downloads: number;
         user: IUser;
         createdAt: Date;
         updatedAt: Date;
@@ -31,17 +33,25 @@ interface IFile {
 }
 
 const DownloadFile: FC = () => {
+    const navigate = useNavigate();
+    
     const { id } = useParams();
-    const [file, setFile] = useState<IFile>();
+    const [file, setFile] = useState<IDownload>();
     const [typeFile, setTypeFile] = useState<string>();
 
     useEffect(() => {
         (async () => {
-            const { data } = await api.get<IFile>(`files/${id}`);
+            const { data } = await api.get<IDownload>(`files/${id}`);
 
             setFile(data);
             setTypeFile(data.file.file.split('.')[1]);
         })();
+    }, [id]);
+
+    const handleDownloadFile = useCallback(async () => {
+        await api.post<IFile>('files/download', { 
+            file_id: id,
+        });
     }, [id]);
 
     return (
@@ -51,10 +61,12 @@ const DownloadFile: FC = () => {
                 {file?
                     <>
                         <Title>{file.file.name}</Title>  
+                        <br />
                         <Desc>{file.file.description}</Desc>
                         <Text>Type: {file.file.type}</Text>
                         <Text>Category: {file.file.category}</Text>
                         <Text>{file.file.file}</Text>
+                        <Text>Downloads: {file.file.downloads}</Text>
                         <Title>Uploaded_By - {file.file.user.name}</Title>
                         <Text>Size: {file.size}</Text>
 
@@ -70,12 +82,14 @@ const DownloadFile: FC = () => {
                             /> 
                             : ''
                         }
-
+                        
                         <a 
                             href={`http://localhost:8081/files/${file.file.file}`} 
-                            download target="_blank" rel="noreferrer"
+                            download
                         >
-                            <Button>Download <FiDownload /></Button>
+                            <Button onClick={handleDownloadFile}>
+                                Download <FiDownload />
+                            </Button>
                         </a>
                     </>
                     : '...Loading'

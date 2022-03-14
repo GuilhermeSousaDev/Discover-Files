@@ -39,7 +39,6 @@ export const Desc = styled.p`
     margin-bottom: 1rem;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 18px;
-    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 `;

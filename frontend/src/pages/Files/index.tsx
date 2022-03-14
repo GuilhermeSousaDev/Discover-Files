@@ -24,7 +24,7 @@ const Files: FC = () => {
             <Navbar />
             <Container>
                 <InitialDiv>
-                    <Title>Melhores Arquivos</Title>
+                    <Title>Mais Baixados</Title>
                     <Link to={'/files/category'}>
                         <Button>Find By Category</Button>
                     </Link>
