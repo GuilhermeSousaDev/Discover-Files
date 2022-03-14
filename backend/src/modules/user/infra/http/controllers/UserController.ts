@@ -45,17 +45,25 @@ export default class UserController {
     }
 
     public async update(req: Request, res: Response): Promise<Response> {
-        const { name, email, password } = req.body;
+        try {
+            const { name, email, password, old_password } = req.body;
+            const { id } = req.user;
 
-        const editProfile = container.resolve(EditProfileService);
+            const editProfile = container.resolve(EditProfileService);
 
-        const user = await editProfile.execute({ 
-            name, 
-            email, 
-            password,
-        })
+            const user = await editProfile.execute({ 
+                id: Number(id),
+                name, 
+                email, 
+                password,
+                old_password,
+            })
 
-        return res.json(user);
+            return res.json(user);
+            
+        } catch (error) {
+            return res.json(error.message);
+        }
     }
 
     public async delete(req: Request, res: Response): Promise<Response> {

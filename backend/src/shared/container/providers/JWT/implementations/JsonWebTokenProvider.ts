@@ -7,6 +7,7 @@ export class JsonWebTokenProvider implements IJsonWebTokenProvider {
     public verifyToken(token: string): string | JwtPayload {
         return verify(token, auth.secret);
     }
+    
     public generateToken({ id, name, avatar }: ICreateToken): string {
         const token = sign({
             id,
