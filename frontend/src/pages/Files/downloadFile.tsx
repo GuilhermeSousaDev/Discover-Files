@@ -6,32 +6,7 @@ import { FiDownload } from 'react-icons/fi';
 import { Container, Title, Desc, Text, Button } from './style';
 import { IFile } from '../../interfaces/IFile';
 import ListFilesByEqualCategory from '../../components/List/category_file_list';
-
-interface IUser {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    avatar: string
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-interface IDownload {
-    file: {
-        id: number
-        name: string
-        description: string
-        category: string;
-        type: string
-        file: string
-        downloads: number;
-        user: IUser;
-        createdAt: Date;
-        updatedAt: Date;
-    }
-    size: string;
-}
+import { IDownload } from '../../interfaces/IDownloadFile';
 
 const DownloadFile: FC = () => {
     const { id } = useParams();
