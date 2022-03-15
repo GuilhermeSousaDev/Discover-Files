@@ -1,10 +1,11 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
 import { FiDownload } from 'react-icons/fi';
 import { Container, Title, Desc, Text, Button } from './style';
 import { IFile } from '../../interfaces/IFile';
+import ListFilesByEqualCategory from '../../components/List/category_file_list';
 
 interface IUser {
     id: number;
@@ -33,8 +34,6 @@ interface IDownload {
 }
 
 const DownloadFile: FC = () => {
-    const navigate = useNavigate();
-    
     const { id } = useParams();
     const [file, setFile] = useState<IDownload>();
     const [typeFile, setTypeFile] = useState<string>();
@@ -85,15 +84,27 @@ const DownloadFile: FC = () => {
                         
                         <a 
                             href={`http://localhost:8081/files/${file.file.file}`} 
-                            download
+                            download target="_blank" rel="noreferrer"
                         >
                             <Button onClick={handleDownloadFile}>
                                 Download <FiDownload />
                             </Button>
                         </a>
+
+                        <Title>Mais Arquivos</Title>
+                
+                        {file.file.category? 
+                            <ListFilesByEqualCategory 
+                                category={file.file.category} 
+                                file_id={file.file.id}
+                            /> 
+                            : ''
+                        }
                     </>
                     : '...Loading'
                 }
+
+                
             </Container>
         </>
     )

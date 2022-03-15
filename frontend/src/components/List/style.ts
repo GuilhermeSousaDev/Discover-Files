@@ -10,6 +10,13 @@ export const Container = styled.li`
     }
 `;
 
+export const UlContainer = styled.ul`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+`;
+
 export const LiContainer = styled.li`
     display: flex;
     flex-direction: column;
