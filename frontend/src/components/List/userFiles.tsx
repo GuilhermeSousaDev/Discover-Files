@@ -23,7 +23,6 @@ const UserFiles: FC = () => {
     return (
         <>
             <br />
-            <h1>Meus Arquivos</h1>
             {files?
                 files.map(file => <ListFiles file={file} />) : ''
             }

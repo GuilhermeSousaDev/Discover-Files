@@ -14,6 +14,13 @@ export const Container = styled.div`
     }
 `;
 
+export const UlContainer = styled.ul`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+`;
+
 export const NameProfile = styled.h2`
     font-family: 'IBM Plex Sans', sans-serif;
 `;

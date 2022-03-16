@@ -9,7 +9,13 @@ import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../services/Context';
-import { Container, Title, Button, NameProfile } from './style';
+import { 
+    Container, 
+    Title, 
+    Button, 
+    NameProfile, 
+    UlContainer,
+} from './style';
 import avatarEmpty from '../../images/avatar_empty.png';
 import ModalChangeAvatar from '../../components/Modal/ModalChangeAvatar';
 import UserFiles from '../../components/List/userFiles';
@@ -78,8 +84,11 @@ const Profile: FC = () => {
                     </Link>
                    </> : '...Loading'
                 }
-
-                <UserFiles />
+                <br />
+                <Title>Meus Arquivos</Title>
+                <UlContainer>
+                    <UserFiles />
+                </UlContainer>
             </Container>
         </>         
     )
