@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import Navbar from '../../components/Navbar';
 import api from '../../services/Axios';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../services/Context';
 import { Container, Title, Button, NameProfile } from './style';
 import avatarEmpty from '../../images/avatar_empty.png';
@@ -65,14 +66,16 @@ const Profile: FC = () => {
                             src={avatarEmpty} 
                             alt="avatar_empty" 
                         />
-                    }
+                    } 
 
                     {showModal?
                         <ModalChangeAvatar /> : ''
                     }
                     <br />
                     <span>{data.email}</span>
-                    <Button>Editar</Button>
+                    <Link to={'/profile/edit'}>
+                        <Button>Editar</Button>
+                    </Link>
                    </> : '...Loading'
                 }
 
