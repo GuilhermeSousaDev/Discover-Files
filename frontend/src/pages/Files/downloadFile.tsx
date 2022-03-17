@@ -5,7 +5,7 @@ import api from '../../services/Axios';
 import { FiDownload } from 'react-icons/fi';
 import { Container, Title, Desc, Text, Button } from './style';
 import { IFile } from '../../interfaces/IFile';
-import ListFilesByEqualCategory from '../../components/List/category_file_list';
+import ListFilesByEqualCategoryOrType from '../../components/List/categoryOrTypeFileList';
 import { IDownload } from '../../interfaces/IDownloadFile';
 
 const DownloadFile: FC = () => {
@@ -69,8 +69,9 @@ const DownloadFile: FC = () => {
                         <Title>Mais Arquivos</Title>
                 
                         {file.file.category? 
-                            <ListFilesByEqualCategory 
+                            <ListFilesByEqualCategoryOrType
                                 category={file.file.category} 
+                                type={file.file.type}
                                 file_id={file.file.id}
                             /> 
                             : ''
