@@ -74,4 +74,12 @@ export class FilesRepository implements IFilesRepository {
             },
         });
     }
+
+    public async findFilesByType(type: string): Promise<IFiles[]> {
+        return this.ormRepository.find({
+            where: {
+                type,
+            },
+        });
+    }
 }

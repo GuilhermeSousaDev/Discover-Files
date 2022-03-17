@@ -6,7 +6,7 @@ import { IFiles } from '../domain/models/IFiles';
 
 interface IResponse {
     file: IFiles;
-    size: number;
+    size: string | number;
 }
 
 @injectable()
@@ -29,7 +29,7 @@ export default class ShowFileService {
             throw new AppError('File not found on directory');
         }
 
-        let size: any = filePathExists.size;
+        let size: string | number = filePathExists.size;
 
         if(size < 1024) {
             size = `${size}Bytes`;

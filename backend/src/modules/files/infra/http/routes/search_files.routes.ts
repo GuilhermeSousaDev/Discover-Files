@@ -3,7 +3,6 @@ import { Router } from 'express';
 import SearchFilesController from '../controllers/SearchFilesController';
 
 const searchFilesRouter = Router();
-
 const searchFileController = new SearchFilesController();
 
 searchFilesRouter.get(

@@ -5,8 +5,8 @@ import isAuthenticated from '@shared/infra/http/middlewares/isAuthenticated';
 import FilesController from '../controllers/FilesController';
 
 const filesRouter = Router();
-
 const filesController = new FilesController();
+
 const multerConfig = multer();
 
 filesRouter.get('/', filesController.index);

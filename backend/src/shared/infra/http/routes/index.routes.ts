@@ -1,5 +1,6 @@
 import filesRouter from '@modules/files/infra/http/routes/files.routes';
 import filesByCategoryRouter from '@modules/files/infra/http/routes/files_by_category.routes';
+import filesByTypeRouter from '@modules/files/infra/http/routes/files_by_type.routes';
 import filesByUserRouter from '@modules/files/infra/http/routes/files_by_user.routes';
 import incrementDownloadRouter from '@modules/files/infra/http/routes/increment_download.routes';
 import searchFilesRouter from '@modules/files/infra/http/routes/search_files.routes';
@@ -19,6 +20,7 @@ router.use('/login', sessionRouter);
 router.use('/files', filesRouter);
 router.use('/files/search', searchFilesRouter);
 router.use('/files/category', filesByCategoryRouter);
+router.use('/files/type', filesByTypeRouter);
 router.use('/files/user', filesByUserRouter);
 router.use('/files/download', incrementDownloadRouter);
 

@@ -10,4 +10,5 @@ export interface IFilesRepository {
     findFiles(name: string): Promise<IFiles[]>;
     findFilesByCategory(category: string): Promise<IFiles[]>;
     findFilesByUser(userId: number): Promise<IFiles[]>;
+    findFilesByType(type: string): Promise<IFiles[]>;
 }

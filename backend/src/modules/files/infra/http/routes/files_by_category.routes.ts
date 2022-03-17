@@ -1,9 +1,9 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
-import FilesByCategoryController from '../controllers/FilesByCategoryController';
+import ListFilesByCategoryController from '../controllers/ListFilesByCategoryController';
 
 const filesByCategoryRouter = Router();
-const filesByCategoryController = new FilesByCategoryController();
+const listFilesByCategoryController = new ListFilesByCategoryController();
 
 filesByCategoryRouter.get(
     '/:category', 
@@ -12,7 +12,7 @@ filesByCategoryRouter.get(
             category: Joi.string().required(),
         }
     }),
-    filesByCategoryController.index,
+    listFilesByCategoryController.index,
 );
 
 export default filesByCategoryRouter;
