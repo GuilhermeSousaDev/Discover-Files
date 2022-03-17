@@ -16,14 +16,21 @@ const ListFilesByEqualCategoryOrType: FC<IProp> = ({ category, type, file_id }) 
 
     useEffect(() => {
         (async () => {
-            const { data } = await api.get<IFile[]>(`files/category/${category}`);
-            const req = await api.get<IFile[]>(`files/type/${type}`);
+            if(category) {
+                const { data } = await api.get<IFile[]>(`files/category/${category}`);
+               
+                const filterFiles = data.filter(file => file.id !== file_id);
 
-            const filterFiles = data.filter(file => file.id !== file_id);
-            const filterTypeFiles = req.data.filter(file => file.id !== file_id);
+                setFiles(filterFiles);
+            } 
 
-            setFiles(filterFiles);
-            setTypeFiles(filterTypeFiles);
+            if(type) {
+                const req = await api.get<IFile[]>(`files/type/${type}`);
+
+                const filterTypeFiles = req.data.filter(file => file.id !== file_id);
+
+                setTypeFiles(filterTypeFiles);
+            }
         })();
     }, [category, file_id, type]);
 
@@ -31,7 +38,7 @@ const ListFilesByEqualCategoryOrType: FC<IProp> = ({ category, type, file_id }) 
         <UlContainer>
             {files?
                 files.map(file => <ListFiles file={file} />)  
-                : '...Loading'
+                : ''
             }
             {typeFiles?
                 typeFiles.map(file => <ListFiles file={file} />) : ''

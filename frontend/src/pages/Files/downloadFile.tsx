@@ -14,6 +14,8 @@ const DownloadFile: FC = () => {
     const [typeFile, setTypeFile] = useState<string>();
 
     useEffect(() => {
+        window.scrollTo({ top: 0 });
+        
         (async () => {
             const { data } = await api.get<IDownload>(`files/${id}`);
 
@@ -68,13 +70,13 @@ const DownloadFile: FC = () => {
 
                         <Title>Mais Arquivos</Title>
                 
-                        {file.file.category? 
+                        {file? 
                             <ListFilesByEqualCategoryOrType
                                 category={file.file.category} 
                                 type={file.file.type}
                                 file_id={file.file.id}
                             /> 
-                            : ''
+                            : '...Loading'
                         }
                     </>
                     : '...Loading'
